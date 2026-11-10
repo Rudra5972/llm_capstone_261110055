@@ -1,0 +1,36 @@
+== E6_kd: Knowledge distillation (self-contained full-FT teacher -> pruned student) | budget 11.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   Phase-1 weights found for: ['M1', 'M2', 'M3', 'M4']
+   !!! no PILOT.json attached: using attention mode 'bidir' (Phase-2 default). Run the 00 notebook (or --exp P0) and attach its output to use the pilot's winner.
+   attention mode: bidir (default (no pilot))
+   environment: {'python': '3.13.16', 'torch': '2.14.1+cu130', 'cuda': '13.0', 'gpus': []}
+   2 jobs on 2 worker(s) ['cpu0', 'cpu1']: ['M4_bloom_alibi', 'M1_gpt2style']
+
+[M4_bloom_alibi@cpu0] -- E6_kd / M4_bloom_alibi (kd, bloom-alibi) --
+[M4_bloom_alibi@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu0]    job self-checks passed: ['output_lengths']
+[M4_bloom_alibi@cpu0]    [kd] trainable 177,869 / 177,869 params (100.000%) in 31 tensors
+[M4_bloom_alibi@cpu0]    [kd] student 0.2M params < teacher 0.3M (0.64x)
+[M4_bloom_alibi@cpu0]    [kd] teacher outputs cached for 17 windows -> /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out4/E6_kd/M4_bloom_alibi/teacher_cache.pt
+[M4_bloom_alibi@cpu0]    smoke ok: 12,081 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.0 min
+[M4_bloom_alibi@cpu0] projected 0.0 min train + 0.0 min probe | 660 min left in the notebook budget
+[M4_bloom_alibi@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu0]    [kd] trainable 177,869 / 177,869 params (100.000%) in 31 tensors
+[M4_bloom_alibi@cpu0]    [kd] student 0.2M params < teacher 0.3M (0.64x)
+[M4_bloom_alibi@cpu0]    [kd] teacher cache reused: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out4/E6_kd/M4_bloom_alibi/teacher_cache.pt
+[M4_bloom_alibi@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.0669 (best) | train loss 1.0140
+[M4_bloom_alibi@cpu0]    training done: best dev Macro-F1 0.0669 at epoch 1 (0.0 min)
+[M4_bloom_alibi@cpu0]    dev Macro-F1 pooled 0.0669 | CL 0.1200 | IT 0.0589 | bias not applied (held-out gain -0.0357)
+[M4_bloom_alibi@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out4/E6_kd/M4_bloom_alibi/submission/submission.zip (6 docs, 213 labels)
+[M4_bloom_alibi@cpu0] DONE E6 M4_bloom_alibi: dev Macro-F1 0.0669
+[M4_bloom_alibi@cpu0] finished in 0.3 min | dev pooled Macro-F1 0.0669 | output so far 0.00 GB
+   BEST of 1 -> M4_bloom_alibi (kd), dev Macro-F1 0.0669
+[M1_gpt2style@cpu0] KD teacher for M1 not found in /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E0_full_ft
+   BEST of 1 -> M4_bloom_alibi (kd), dev Macro-F1 0.0669
+   BEST of 1 -> M4_bloom_alibi (kd), dev Macro-F1 0.0669
+
+   UPLOAD: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out4/E6_kd/BEST/submission.zip (winner M4_bloom_alibi, dev pooled Macro-F1 0.0669) -- validated
+
+== E6_kd finished this session in 0.4 min (exit 0)
+   M4_bloom_alibi                   done                         0.0669  
+   M1_gpt2style                     FAILED                       nan  KD teacher missing in /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E0_full_ft
+   Save this session's output (Save Version) -- it is the input of later sessions.

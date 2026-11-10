@@ -1,0 +1,233 @@
+3.13.16 2026-10-21 06:58:15
+torch 2.14.1+cu130 | GPUs: 0 []
+inputs: ['01-train-gpt2style', '02-train-llamastyle', '03-train-mistral-sliding', '04-train-bloom-alibi', 'phase4-cjpe-data']
+Writing /kaggle/working/phase4/bpe_tokenizer.py
+Writing /kaggle/working/phase4/phase1_models.py
+Writing /kaggle/working/phase4/ner_common.py
+Writing /kaggle/working/phase4/ner_models.py
+Writing /kaggle/working/phase4/ner_peft.py
+Writing /kaggle/working/phase4/cjpe_common.py
+Writing /kaggle/working/phase4/cjpe_data.py
+Writing /kaggle/working/phase4/cjpe_tok.py
+Writing /kaggle/working/phase4/cjpe_models.py
+Writing /kaggle/working/phase4/cjpe_peft.py
+Writing /kaggle/working/phase4/cjpe_eval.py
+Writing /kaggle/working/phase4/cjpe_kd.py
+Writing /kaggle/working/phase4/cjpe_train.py
+Writing /kaggle/working/phase4/cjpe_predict.py
+Writing /kaggle/working/phase4/validate_submission.py
+Writing /kaggle/working/phase4/select_best.py
+Writing /kaggle/working/phase4/aggregate.py
+Writing /kaggle/working/phase4/run_experiment.py
+Writing /kaggle/working/phase4/selftest.py
+all 19 modules verified
+Phase-1 weights: {
+ "M1": "/kaggle/input/01-train-gpt2style/p1_M1/final",
+ "M2": "/kaggle/input/02-train-llamastyle/p1_M2/final",
+ "M3": "/kaggle/input/03-train-mistral-sliding/p1_M3/final",
+ "M4": "/kaggle/input/04-train-bloom-alibi/p1_M4/final"
+}
+train.json -> ['/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Train/train.json']
+dev.json -> ['/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Train/dev.json']
+test.json -> ['/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Test/test.json']
+HF secret found: no
+earlier phase4_out inputs: []
+=== Phase 4 E2: LoRMA+ (compulsory) | 2026-10-21 06:58:17 | budget 3.5 h | 0 GPU(s) | free disk 23 GB ===
+   [phase1] M1 gpt2style        -> /kaggle/input/01-train-gpt2style/p1_M1/final
+   [phase1] M2 llamastyle       -> /kaggle/input/02-train-llamastyle/p1_M2/final
+   [phase1] M3 mistral-sliding  -> /kaggle/input/03-train-mistral-sliding/p1_M3/final
+   [phase1] M4 bloom-alibi      -> /kaggle/input/04-train-bloom-alibi/p1_M4/final
+   [attn] bidir (default; no PILOT.json attached)
+   [data] source: kaggle_dataset: {'train': '/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Train/train.json', 'dev': '/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Train/dev.json', 'test': '/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Test/test.json'}
+   [data] train: 61 records, list of objects, keys id='id' text='text' label='label'
+   [data] dev: 20 records, list of objects, keys id='id' text='text' label='label'
+   [data] test: 20 records, list of objects, keys id='id' text='text' label=None
+   [example] train: id='train_0000' label=0 text='reasons evidence facts facts appellant conviction appeal counsel issue . therefore (1) dismissed evidence the order accordingly dismissed THE appeal held the court appeal section held (1) bail conviction    supreme high bail that the facts the reasons court ORDER issue , section counsel appellant le'
+   [example] dev: id='dev_0000' label=0 text='respondent court facts the evidence that witness judgment respondent counsel counsel court evidence (1) supreme section dismissed held bail reasons act respondent therefore allowed supreme high conviction state evidence reasons petition\n\nORDER\n the appeal is dismissed and the conviction stands . the'
+   [example] test: id='test_0000' label=None text='judgment the accused appeal bail SENTENCE that judgment that the ACCORDINGLY evidence facts BAIL the supreme reasons the witness SECTION order appellant ORDER accused court that ISSUE that 12/2003 accused sentence high (1) supreme that accused allowed \n bail accordingly DISMISSED section bail . dism'
+   !!! [leak-guard] 1 train case(s) also occur in test -> DROPPED from train (ids ['train_leak_0']...)
+   [audit] token statistics in 0s
+   [audit] split   n      empty dup_id dup_text  pos_rate  chars(median)
+   [audit] train      61      0      0        0     0.508  3,352
+   [audit] dev        20      0      0        0     0.500  3,365
+   [audit] test       20      0      0        0            7,288
+   [audit] chars/token 6.81 (sample of 100)
+   [audit] train tokens: median 503, p90 2,934, max 2,971; >512 47%  >1024 45%  >2048 28%  >4096 0%
+   [audit] dev tokens: median 518, p90 2,874, max 2,898; >512 50%  >1024 45%  >2048 15%  >4096 0%
+   [audit] test tokens: median 1,086, p90 2,929, max 2,954; >512 65%  >1024 65%  >2048 35%  >4096 0%
+   [leak-guard] train x test {'id': 0, 'sha1': 1, 'norm': 1}, dev x test {'id': 0, 'sha1': 0, 'norm': 0}, train x dev {'id': 0, 'sha1': 0, 'norm': 0}; dropped train 1, dev 0
+   [cache] building (key 41f6e78a938691ba_1_0, head 1022 / tail 1022 tokens per document, 2 processes) ...
+   [cache] train: 60 docs tokenised (0s so far)
+   [cache] dev: 20 docs tokenised (0s so far)
+   [cache] test: 20 docs tokenised (0s so far)
+   [queue] 4 jobs on 1 slot(s) (CPU); notebook budget ends at 10:28
+   [queue] START M4_bloom_alibi (lorma, attempt 1) on slot 0, budget 50 min
+[M4_bloom_alibi] start E2/lorma/M4 on cpu, budget 50 min, attempt 1
+[M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[M4_bloom_alibi]    [lorma] trainable 45,634 / 115,714 (39.437%)
+/kaggle/working/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+[M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[M4_bloom_alibi]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[M4_bloom_alibi]    [check] merged_equals_unmerged       advisory  pass value=8.2e-08 thr=0.001
+[M4_bloom_alibi]    [preflight] train 11,930 tok/s, inference 31,926 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[M4_bloom_alibi]    [plan] budget 50 min, available 48 min, train 11,930 tok/s, infer 31,926 tok/s
+[M4_bloom_alibi]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[M4_bloom_alibi]    [plan]   4         0.1             0.0              530
+[M4_bloom_alibi]    [plan]   2         0.1             0.0              779
+[M4_bloom_alibi]    [plan]   1         0.0             0.0             1285
+[M4_bloom_alibi]    [plan] CHOSEN: K=4 epochs=6 train_fraction=1.0 (60/60 docs), projected 1 min
+[M4_bloom_alibi]    [train] 60 docs/epoch, 4 steps/epoch x 6 epochs = 24 steps; eval at steps [2, 4] of each epoch; training deadline in 49 min
+[M4_bloom_alibi]    [eval] epoch 0.50: dev macro-F1 0.4048 (tau 0.51; @0.5 0.3333) loss 0.6943
+[M4_bloom_alibi]    [eval] epoch 1.00: dev macro-F1 0.5200 (tau 0.51; @0.5 0.3333) loss 0.6928
+[M4_bloom_alibi]    [eval] epoch 1.50: dev macro-F1 0.5960 (tau 0.51; @0.5 0.3333) loss 0.6917
+[M4_bloom_alibi]    [eval] epoch 2.00: dev macro-F1 0.4792 (tau 0.51; @0.5 0.3333) loss 0.6905
+[M4_bloom_alibi]    [eval] epoch 2.50: dev macro-F1 0.5200 (tau 0.51; @0.5 0.4357) loss 0.6894
+[M4_bloom_alibi]    [eval] epoch 3.00: dev macro-F1 0.5238 (tau 0.52; @0.5 0.4505) loss 0.6885
+[M4_bloom_alibi]    [eval] epoch 3.50: dev macro-F1 0.5396 (tau 0.50; @0.5 0.5396) loss 0.6874
+[M4_bloom_alibi]    [train] stopped: early stopping at step 14/24
+[M4_bloom_alibi]    DONE dev macro-F1 0.5960 (P 0.6042 R 0.6000, tau 0.51); test positive rate 0.350; submission validated
+   [queue] END M4_bloom_alibi: done (dev macro-F1 0.5960)
+   [queue] START M2_llamastyle (lorma, attempt 1) on slot 0, budget 67 min
+[M2_llamastyle] start E2/lorma/M2 on cpu, budget 67 min, attempt 1
+[M2_llamastyle]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[M2_llamastyle]    [lorma] trainable 41,538 / 97,890 (42.433%)
+/kaggle/working/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+[M2_llamastyle]    [check] all_tensors_on_one_device    critical  pass
+[M2_llamastyle]    [check] forward_backward_finite      critical  pass
+[M2_llamastyle]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[M2_llamastyle]    [check] merged_equals_unmerged       advisory  pass value=5.96e-08 thr=0.001
+[M2_llamastyle]    [preflight] train 21,190 tok/s, inference 48,928 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[M2_llamastyle]    [plan] budget 67 min, available 64 min, train 21,190 tok/s, infer 48,928 tok/s
+[M2_llamastyle]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[M2_llamastyle]    [plan]   4         0.1             0.0             1221
+[M2_llamastyle]    [plan]   2         0.0             0.0             1785
+[M2_llamastyle]    [plan]   1         0.0             0.0             2943
+[M2_llamastyle]    [plan] CHOSEN: K=4 epochs=6 train_fraction=1.0 (60/60 docs), projected 0 min
+[M2_llamastyle]    [train] 60 docs/epoch, 4 steps/epoch x 6 epochs = 24 steps; eval at steps [2, 4] of each epoch; training deadline in 66 min
+[M2_llamastyle]    [eval] epoch 0.50: dev macro-F1 0.8000 (tau 0.50; @0.5 0.8000) loss 0.6897
+[M2_llamastyle]    [eval] epoch 1.00: dev macro-F1 0.7494 (tau 0.50; @0.5 0.7494) loss 0.6883
+[M2_llamastyle]    [eval] epoch 1.50: dev macro-F1 0.7494 (tau 0.50; @0.5 0.7494) loss 0.6871
+[M2_llamastyle]    [eval] epoch 2.00: dev macro-F1 0.8465 (tau 0.50; @0.5 0.8465) loss 0.6859
+[M2_llamastyle]    [eval] epoch 2.50: dev macro-F1 0.8465 (tau 0.50; @0.5 0.8465) loss 0.6846
+[M2_llamastyle]    [eval] epoch 3.00: dev macro-F1 0.8990 (tau 0.50; @0.5 0.8990) loss 0.6836
+[M2_llamastyle]    [eval] epoch 3.50: dev macro-F1 0.8990 (tau 0.50; @0.5 0.8990) loss 0.6826
+[M2_llamastyle]    [eval] epoch 4.00: dev macro-F1 0.8990 (tau 0.50; @0.5 0.8990) loss 0.6818
+[M2_llamastyle]    [eval] epoch 4.50: dev macro-F1 0.8990 (tau 0.50; @0.5 0.8990) loss 0.6811
+[M2_llamastyle]    [eval] epoch 5.00: dev macro-F1 0.8990 (tau 0.50; @0.5 0.8990) loss 0.6806
+[M2_llamastyle]    [train] stopped: early stopping at step 20/24
+[M2_llamastyle]    DONE dev macro-F1 0.8990 (P 0.9167 R 0.9000, tau 0.50); test positive rate 0.550; submission validated
+   [queue] END M2_llamastyle: done (dev macro-F1 0.8990)
+   [queue] START M3_mistral_sliding (lorma, attempt 1) on slot 0, budget 100 min
+[M3_mistral_sliding] start E2/lorma/M3 on cpu, budget 100 min, attempt 1
+[M3_mistral_sliding]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[M3_mistral_sliding]    [lorma] trainable 41,538 / 97,890 (42.433%)
+/kaggle/working/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+[M3_mistral_sliding]    [check] all_tensors_on_one_device    critical  pass
+[M3_mistral_sliding]    [check] forward_backward_finite      critical  pass
+[M3_mistral_sliding]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[M3_mistral_sliding]    [check] merged_equals_unmerged       advisory  pass value=4.47e-08 thr=0.001
+[M3_mistral_sliding]    [preflight] train 19,044 tok/s, inference 51,064 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[M3_mistral_sliding]    [plan] budget 100 min, available 95 min, train 19,044 tok/s, infer 51,064 tok/s
+[M3_mistral_sliding]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[M3_mistral_sliding]    [plan]   4         0.1             0.0             1690
+[M3_mistral_sliding]    [plan]   2         0.0             0.0             2482
+[M3_mistral_sliding]    [plan]   1         0.0             0.0             4094
+[M3_mistral_sliding]    [plan] CHOSEN: K=4 epochs=6 train_fraction=1.0 (60/60 docs), projected 0 min
+[M3_mistral_sliding]    [train] 60 docs/epoch, 4 steps/epoch x 6 epochs = 24 steps; eval at steps [2, 4] of each epoch; training deadline in 99 min
+[M3_mistral_sliding]    [eval] epoch 0.50: dev macro-F1 0.6491 (tau 0.50; @0.5 0.6491) loss 0.6903
+[M3_mistral_sliding]    [eval] epoch 1.00: dev macro-F1 0.6491 (tau 0.50; @0.5 0.6491) loss 0.6897
+[M3_mistral_sliding]    [eval] epoch 1.50: dev macro-F1 0.6000 (tau 0.50; @0.5 0.6000) loss 0.6893
+[M3_mistral_sliding]    [eval] epoch 2.00: dev macro-F1 0.5489 (tau 0.50; @0.5 0.5489) loss 0.6889
+[M3_mistral_sliding]    [eval] epoch 2.50: dev macro-F1 0.5489 (tau 0.50; @0.5 0.5489) loss 0.6885
+[M3_mistral_sliding]    [train] stopped: early stopping at step 10/24
+[M3_mistral_sliding]    DONE dev macro-F1 0.6491 (P 0.6515 R 0.6500, tau 0.50); test positive rate 0.300; submission validated
+   [queue] END M3_mistral_sliding: done (dev macro-F1 0.6491)
+   [queue] START M1_gpt2style (lorma, attempt 1) on slot 0, budget 201 min
+[M1_gpt2style] start E2/lorma/M1 on cpu, budget 201 min, attempt 1
+[M1_gpt2style]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[M1_gpt2style]    [lorma] trainable 45,634 / 148,482 (30.734%)
+/kaggle/working/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+[M1_gpt2style]    [check] all_tensors_on_one_device    critical  pass
+[M1_gpt2style]    [check] forward_backward_finite      critical  pass
+[M1_gpt2style]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[M1_gpt2style]    [check] merged_equals_unmerged       advisory  pass value=5.96e-08 thr=0.001
+[M1_gpt2style]    [preflight] train 19,491 tok/s, inference 34,714 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[M1_gpt2style]    [plan] budget 201 min, available 190 min, train 19,491 tok/s, infer 34,714 tok/s
+[M1_gpt2style]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[M1_gpt2style]    [plan]   4         0.1             0.0             3172
+[M1_gpt2style]    [plan]   2         0.0             0.0             4600
+[M1_gpt2style]    [plan]   1         0.0             0.0             7577
+[M1_gpt2style]    [plan] CHOSEN: K=4 epochs=6 train_fraction=1.0 (60/60 docs), projected 0 min
+[M1_gpt2style]    [train] 60 docs/epoch, 4 steps/epoch x 6 epochs = 24 steps; eval at steps [2, 4] of each epoch; training deadline in 199 min
+[M1_gpt2style]    [eval] epoch 0.50: dev macro-F1 0.6419 (tau 0.50; @0.5 0.6419) loss 0.6853
+[M1_gpt2style]    [eval] epoch 1.00: dev macro-F1 0.6267 (tau 0.50; @0.5 0.6267) loss 0.6840
+[M1_gpt2style]    [eval] epoch 1.50: dev macro-F1 0.6703 (tau 0.50; @0.5 0.6703) loss 0.6831
+[M1_gpt2style]    [eval] epoch 2.00: dev macro-F1 0.6703 (tau 0.50; @0.5 0.6703) loss 0.6821
+[M1_gpt2style]    [eval] epoch 2.50: dev macro-F1 0.7333 (tau 0.50; @0.5 0.7333) loss 0.6810
+[M1_gpt2style]    [eval] epoch 3.00: dev macro-F1 0.7333 (tau 0.50; @0.5 0.7333) loss 0.6799
+[M1_gpt2style]    [eval] epoch 3.50: dev macro-F1 0.7333 (tau 0.50; @0.5 0.7333) loss 0.6789
+[M1_gpt2style]    [eval] epoch 4.00: dev macro-F1 0.7333 (tau 0.50; @0.5 0.7333) loss 0.6780
+[M1_gpt2style]    [eval] epoch 4.50: dev macro-F1 0.7333 (tau 0.50; @0.5 0.7333) loss 0.6772
+[M1_gpt2style]    [train] stopped: early stopping at step 18/24
+[M1_gpt2style]    DONE dev macro-F1 0.7333 (P 0.8333 R 0.7500, tau 0.50); test positive rate 0.350; submission validated
+   [queue] END M1_gpt2style: done (dev macro-F1 0.7333)
+   [select] E2_lorma: BEST = M2_llamastyle (dev macro-F1 0.8990)
+   [final] ALL_RESULTS.csv: 4 rows
+   [plan] upload order (Codabench, <= 10/day):
+   [plan]  1. E2 lorma       M2 dev F1 0.8990 [required]  /kaggle/working/phase4_out/E2_lorma/M2_llamastyle/submission/submission.zip
+   [plan]  2. E2 lorma       M1 dev F1 0.7333 [optional extra]  /kaggle/working/phase4_out/E2_lorma/M1_gpt2style/submission/submission.zip
+   [plan]  3. E2 lorma       M3 dev F1 0.6491 [optional extra]  /kaggle/working/phase4_out/E2_lorma/M3_mistral_sliding/submission/submission.zip
+   [plan]  4. E2 lorma       M4 dev F1 0.5960 [optional extra]  /kaggle/working/phase4_out/E2_lorma/M4_bloom_alibi/submission/submission.zip
+   [plan] MISSING experiments (no valid submission yet): ['E1', 'E3', 'E4', 'E5', 'E6']
+   [plan] WARNING: only models ['M2'] appear among the six uploads
+   [final] 4/4 jobs DONE; output 0.00 GB
+
+===== run_experiment.py exit code: 0 (0 ok, 1 nothing finished, 2 data / weights missing) =====
+job                               status         dev F1   tau  K  frac    min  check
+M4_bloom_alibi                    DONE           0.5960  0.51  4     1  0.317  PASS 
+M2_llamastyle                     DONE           0.8990   0.5  4     1  0.243  PASS 
+M3_mistral_sliding                DONE           0.6491   0.5  4     1  0.122  PASS 
+M1_gpt2style                      DONE           0.7333   0.5  4     1  0.225  PASS 
+
+BEST: {"experiment": "E2", "job": "M2_llamastyle", "model_id": "M2", "technique": "lorma", "dev_macro_f1": 0.898989898989899, "status": "DONE", "run_dir": "/kaggle/working/phase4_out/E2_lorma/M2_llamastyle"}
+UPLOAD THIS: /kaggle/working/phase4_out/E2_lorma/BEST/submission.zip
+
+----- INDEX.md -----
+# Phase 4 (CJPE) -- E2: LoRMA+ (compulsory)
+
+Updated 2026-10-21 07:00:04. Deadline 2026-10-21 23:59 IST.
+
+| job | model | technique | status | dev macro-F1 | tau | epochs | K | train frac | minutes | reason |
+|---|---|---|---|---|---|---|---|---|---|---|
+| M4_bloom_alibi | M4 | lorma | DONE | 0.5960 | 0.51 | 3.50 | 4 | 1.00 | 0.3 |  |
+| M2_llamastyle | M2 | lorma | DONE | 0.8990 | 0.50 | 5.00 | 4 | 1.00 | 0.2 |  |
+| M3_mistral_sliding | M3 | lorma | DONE | 0.6491 | 0.50 | 2.50 | 4 | 1.00 | 0.1 |  |
+| M1_gpt2style | M1 | lorma | DONE | 0.7333 | 0.50 | 4.50 | 4 | 1.00 | 0.2 |  |
+
+
+----- UPLOAD_PLAN.csv -----
+order,experiment,technique,model_id,job,dev_macro_f1,role,path
+1,E2,lorma,M2,M2_llamastyle,0.89899,required,/kaggle/working/phase4_out/E2_lorma/M2_llamastyle/submission/submission.zip
+2,E2,lorma,M1,M1_gpt2style,0.733333,optional extra,/kaggle/working/phase4_out/E2_lorma/M1_gpt2style/submission/submission.zip
+3,E2,lorma,M3,M3_mistral_sliding,0.649123,optional extra,/kaggle/working/phase4_out/E2_lorma/M3_mistral_sliding/submission/submission.zip
+4,E2,lorma,M4,M4_bloom_alibi,0.59596,optional extra,/kaggle/working/phase4_out/E2_lorma/M4_bloom_alibi/submission/submission.zip
+
+phase4_out/  (0.0 MB in files here)
+  E2_lorma/  (0.0 MB in files here)
+    BEST/  (0.0 MB in files here)
+    M1_gpt2style/  (0.0 MB in files here)
+    M2_llamastyle/  (0.0 MB in files here)
+    M3_mistral_sliding/  (0.0 MB in files here)
+    M4_bloom_alibi/  (0.0 MB in files here)
+total output 0.00 GB
+
+REMINDER: Save Version -> Save & Run All (Commit) keeps /kaggle/working/phase4_out as this notebook's output. Download BEST/submission.zip and results_*.csv from the Output tab.

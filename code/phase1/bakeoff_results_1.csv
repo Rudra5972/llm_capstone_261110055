@@ -1,0 +1,11 @@
+architecture,params_M,eval_loss,perplexity,bertscore_f1,rougeL,bleu4,train_minutes
+rwkv_linear,50.13,4.7685,117.74,0.8061,0.2006,5.06,18.4
+decoder_only_gpt2style,30.04,5.556,258.78,0.7938,0.2046,3.93,0.6
+efficient_llamastyle,48.04,5.4661,236.53,0.7935,0.1966,3.67,0.7
+sliding_window_mistral,48.04,5.4278,227.65,0.7932,0.1993,3.67,0.6
+decoder_only_bloom_alibi,29.95,5.3216,204.71,0.7912,0.1935,3.42,0.6
+encoder_decoder_fnet,48.71,5.9676,390.58,0.7817,0.2021,3.81,1.2
+encoder_decoder_longformer,51.66,6.1497,468.59,0.7711,0.2072,2.35,0.9
+encoder_decoder_bert2gpt2,50.33,6.2346,510.1,0.7561,0.1984,1.84,0.7
+lstm,32.59,6.6817,797.7,0.7483,0.21,0.53,0.8
+encoder_decoder_t5style,29.33,9.9452,20852.63,0.7424,0.1541,0.32,1.0

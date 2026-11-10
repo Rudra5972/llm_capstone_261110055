@@ -1,0 +1,185 @@
+============================== 00_executed
+--- cell 1: import os, sys, json, hashlib, subprocess, glob  (errors: 0)
+3.13.16
+torch 2.14.1+cu130 | GPUs: 0 []
+inputs: ['cs781-phase3', 'datasets']
+
+--- cell 20: # every module must be byte-identical to the generated version (same code in all notebooks)  (errors: 0)
+all 18 modules verified
+Phase-1 weights: {
+ "M1": "/kaggle/input/datasets/rudra1610/01-train-gpt2style/final",
+ "M2": "/kaggle/input/datasets/rudra1610/02-train-llamastyle/final",
+ "M3": "/kaggle/input/datasets/rudra1610/03-train-mistral-sliding/final",
+ "M4": "/kaggle/input/datasets/rudra1610/04-train-bloom-alibi/final"
+}
+bpe_model.json: ['/kaggle/input/datasets/rudra1610/01-train-gpt2style/final/bpe_model.json', '/kaggle/input/datasets/rudra1610/02-train-llamastyle/final/bpe_model.json', '/kaggle/input/datasets/rudra1610/03-train-mistral-sliding/final/bpe_model.json', '/kaggle/input/datasets/rudra1610/04-train-bloom-alibi/final/bpe_model.json']
+labels ( 13 ): ['Fact', 'Issue', 'ArgumentPetitioner', 'ArgumentRespondent', 'Statute', 'Dissent', 'PrecedentReliedUpon', 'PrecedentNotReliedUpon', 'PrecedentOverruled', 'RulingByLowerCourt', 'RatioOfTheDecision', 'RulingByPresentCourt', 'None']
+
+--- cell 21: # data discovery + gates G0 (schema, ID collisions), G1 (tokenisation), G2 (packing and  (errors: 0)
+   G0 passed: docs {'CL_train': 3, 'CL_dev': 3, 'CL_test': 3, 'IT_train': 3, 'IT_dev': 3, 'IT_test': 3} | sentences {'CL_train': 97, 'CL_dev': 112, 'CL_test': 93, 'IT_train': 120, 'IT_dev': 120, 'IT_test': 120}
+   class histogram CL_train: {'Fact': 42, 'Issue': 0, 'ArgumentPetitioner': 20, 'ArgumentRespondent': 8, 'Statute': 0, 'Dissent': 0, 'PrecedentReliedUpon': 0, 'PrecedentNotReliedUpon': 0, 'PrecedentOverruled': 0, 'RulingByLowerCourt': 0, 'RatioOfTheDecision': 23, 'RulingByPresentCourt': 4, 'None': 0}
+   class histogram CL_dev: {'Fact': 63, 'Issue': 0, 'ArgumentPetitioner': 15, 'ArgumentRespondent': 0, 'Statute': 0, 'Dissent': 0, 'PrecedentReliedUpon': 0, 'PrecedentNotReliedUpon': 0, 'PrecedentOverruled': 0, 'RulingByLowerCourt': 31, 'RatioOfTheDecision': 1, 'RulingByPresentCourt': 1, 'None': 1}
+   class histogram IT_train: {'Fact': 40, 'Issue': 6, 'ArgumentPetitioner': 11, 'ArgumentRespondent': 6, 'Statute': 36, 'Dissent': 0, 'PrecedentReliedUpon': 3, 'PrecedentNotReliedUpon': 0, 'PrecedentOverruled': 0, 'RulingByLowerCourt': 13, 'RatioOfTheDecision': 0, 'RulingByPresentCourt': 0, 'None': 5}
+   class histogram IT_dev: {'Fact': 37, 'Issue': 6, 'ArgumentPetitioner': 22, 'ArgumentRespondent': 0, 'Statute': 1, 'Dissent': 0, 'PrecedentReliedUpon': 0, 'PrecedentNotReliedUpon': 14, 'PrecedentOverruled': 0, 'RulingByLowerCourt': 19, 'RatioOfTheDecision': 18, 'RulingByPresentCourt': 0, 'None': 3}
+   G1 passed: tokens/sentence {'mean': 61.670694864048336, 'p50': 49.0, 'p95': 150.89999999999986, 'p99': 228.94999999999993, 'max': 454.0} | tokens/doc {'mean': 2304.8888888888887, 'p50': 2157.5, 'p95': 3356.95, 'p99': 3379.39, 'max': 3385.0} | unk fallbacks 0 | truncated at 256: 5
+   G2a passed: window packing round trip for doc/sent/ctx_1 x bidir/causal ({'windows_train': 55, 'max_window_tokens': 1004, 'windows_infer': 67})
+   G2b passed: validator accepts the dummy all-'None' prediction and rejects 6 corrupted variants
+   data cache written to /kaggle/working/phase3_data in 0.4 s
+   data cache: /kaggle/working/phase3_data | gates PASSED | G0 docs {'CL_train': 3, 'CL_dev': 3, 'CL_test': 3, 'IT_train': 3, 'IT_dev': 3, 'IT_test': 3} | G1 tokens/sentence {'mean': 61.670694864048336, 'p50': 49.0, 'p95': 150.89999999999986, 'p99': 228.94999999999993, 'max': 454.0}
+
+--- cell 22: !cd /kaggle/working/phase3 && python selftest.py --full-size --data-dir /kaggle/working/phase3_data   (errors: 0)
+   PASS 1_macro_f1 (0.0s)
+   PASS 2_window_packing (0.1s)
+   PASS 3_output_lengths_and_validator (0.0s)
+   PASS 4_peft_techniques (4.2s)
+   PASS 5_prefix_prompt_visibility (1.3s)
+   PASS 6_overfit_32 (16.1s)
+   PASS 7_kill_resume (5.6s)
+   PASS 8_full_size_trainable_pct (31.4s)
+{"ok": true, "failed": []}
+
+--- cell 23: !cd /kaggle/working/phase3 && python run_experiment.py --exp P0 --resume auto  (errors: 0)
+== P0_pilot: attention-mode pilot | budget 11.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   Phase-1 weights found for: ['M1', 'M2', 'M3', 'M4']
+   attention mode: bidir (pilot jobs set their own mode)
+   environment: {'python': '3.13.16', 'torch': '2.14.1+cu130', 'cuda': '13.0', 'gpus': []}
+   GPU sanity: ok [] | failed []
+   no usable GPU -> running on CPU (slow)
+   2 jobs on 1 worker(s) ['cpu']: ['lora_causal_M2', 'lora_bidir_M2']
+
+[lora_causal_M2@cpu] -- P0_pilot / lora_causal_M2 (lora, llamastyle) --
+[lora_causal_M2@cpu]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lora_causal_M2@cpu]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lora_causal_M2@cpu]    [lora] trainable 66,509 / 291,341 params (22.829%) in 60 tensors
+...
+[lora_bidir_M2@cpu]    training done: best dev Macro-F1 0.0306 at epoch 1 (0.0 min)
+[lora_bidir_M2@cpu]    dev Macro-F1 pooled 0.0306 | CL 0.0394 | IT 0.0387 | bias APPLIED (held-out gain +0.0067)
+[lora_bidir_M2@cpu]    submission written and validated: /kaggle/working/phase3_out/P0_pilot/lora_bidir_M2/submission/submission.zip (6 docs, 213 labels)
+[lora_bidir_M2@cpu] DONE P0 lora_bidir_M2: dev Macro-F1 0.0306
+[lora_bidir_M2@cpu] finished in 0.2 min | dev pooled Macro-F1 0.0306 | output so far 0.00 GB
+   PILOT: causal 0.0371 vs bidir 0.0306 -> attention mode 'causal' (PILOT.json)
+
+== P0_pilot finished this session in 0.5 min (exit 0)
+   lora_causal_M2                   done                         0.0371  
+   lora_bidir_M2                    done                         0.0306  
+   Save this session's output (Save Version) -- it is the input of later sessions.
+
+--- cell 24: OUT = "/kaggle/working/phase3_out"  (errors: 0)
+# Phase-3 outputs (generated by run_experiment.py)
+
+Output size: 0.00 GB | free disk: 23.3 GB
+
+## P0_pilot  (updated 2026-10-15 12:01:11)
+
+| job | gpu | status | dev Macro-F1 | CL | IT | minutes | note |
+|---|---|---|---|---|---|---|---|
+| lora_causal_M2 | cpu | done | 0.0371 | 0.0606 | 0.0342 | 0.2 |  |
+| lora_bidir_M2 | cpu | done | 0.0306 | 0.0394 | 0.0387 | 0.2 |  |
+
+Save this session's output (Save Version) before it ends; attach it to the next session so finished jobs are skipped and unfinished ones resume.
+...
+      "dev_macro_f1": 0.03056588186699711,
+      "dev_per_domain": {
+        "CL": 0.03937007874015748,
+        "IT": 0.03873239436619718
+      },
+      "train_minutes": 0.03352590799331665
+    }
+  },
+  "setup": "M2 + LoRA, 1 epoch each",
+  "written": "2026-10-15 12:01:11"
+}
+
+--- cell 25: OUT = "/kaggle/working/phase3_out"  (errors: 0)
+phase3_out/  (0.0 MB in files here)
+  P0_pilot/  (0.0 MB in files here)
+    lora_bidir_M2/  (0.0 MB in files here)
+    lora_causal_M2/  (0.0 MB in files here)
+
+Upload to Codabench (validated):
+
+============================== E1_executed
+--- cell 1: import os, sys, json, hashlib, subprocess, glob  (errors: 0)
+3.13.16
+torch 2.14.1+cu130 | GPUs: 0 []
+inputs: ['cs781-phase3', 'datasets', 'p3-00-output']
+
+--- cell 20: # every module must be byte-identical to the generated version (same code in all notebooks)  (errors: 0)
+all 18 modules verified
+Phase-1 weights: {
+ "M1": "/kaggle/input/datasets/rudra1610/01-train-gpt2style/final",
+ "M2": "/kaggle/input/datasets/rudra1610/02-train-llamastyle/final",
+ "M3": "/kaggle/input/datasets/rudra1610/03-train-mistral-sliding/final",
+ "M4": "/kaggle/input/datasets/rudra1610/04-train-bloom-alibi/final"
+}
+bpe_model.json: ['/kaggle/input/datasets/rudra1610/01-train-gpt2style/final/bpe_model.json', '/kaggle/input/datasets/rudra1610/02-train-llamastyle/final/bpe_model.json', '/kaggle/input/datasets/rudra1610/03-train-mistral-sliding/final/bpe_model.json', '/kaggle/input/datasets/rudra1610/04-train-bloom-alibi/final/bpe_model.json']
+labels ( 13 ): ['Fact', 'Issue', 'ArgumentPetitioner', 'ArgumentRespondent', 'Statute', 'Dissent', 'PrecedentReliedUpon', 'PrecedentNotReliedUpon', 'PrecedentOverruled', 'RulingByLowerCourt', 'RatioOfTheDecision', 'RulingByPresentCourt', 'None']
+
+--- cell 21: # data discovery + gates G0 (schema, ID collisions), G1 (tokenisation), G2 (packing and  (errors: 0)
+   using the data cache attached at /kaggle/input/p3-00-output/phase3_data
+   data cache: /kaggle/input/p3-00-output/phase3_data | gates PASSED | G0 docs {'CL_train': 3, 'CL_dev': 3, 'CL_test': 3, 'IT_train': 3, 'IT_dev': 3, 'IT_test': 3} | G1 tokens/sentence {'mean': 61.670694864048336, 'p50': 49.0, 'p95': 150.89999999999986, 'p99': 228.94999999999993, 'max': 454.0}
+
+--- cell 22: !cd /kaggle/working/phase3 && python run_experiment.py --exp E1 --resume auto  (errors: 0)
+== E1_lorma: LoRMA+ (compulsory) | budget 11.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   using the data cache attached at /kaggle/input/p3-00-output/phase3_data
+   Phase-1 weights found for: ['M1', 'M2', 'M3', 'M4']
+[selftest]    PASS 1_macro_f1 (0.0s)
+[selftest]    PASS 2_window_packing (0.2s)
+[selftest]    PASS 3_output_lengths_and_validator (0.0s)
+[selftest]    PASS 4_peft_techniques (3.9s)
+[selftest]    PASS 5_prefix_prompt_visibility (0.8s)
+[selftest]    PASS 6_overfit_32 (16.5s)
+[selftest]    PASS 7_kill_resume (6.1s)
+[selftest] {"ok": true, "failed": []}
+   attention mode: causal (pilot /kaggle/input/p3-00-output/phase3_out/P0_pilot/PILOT.json)
+...
+   BEST of 4 -> M3_mistral_sliding (lorma), dev Macro-F1 0.0948
+   BEST of 4 -> M3_mistral_sliding (lorma), dev Macro-F1 0.0948
+
+   UPLOAD: /kaggle/working/phase3_out/E1_lorma/BEST/submission.zip (winner M3_mistral_sliding, dev pooled Macro-F1 0.0948) -- validated
+
+== E1_lorma finished this session in 7.1 min (exit 0)
+   M4_bloom_alibi                   done                         0.0669  
+   M2_llamastyle                    done                         0.0669  
+   M3_mistral_sliding               done                         0.0948  
+   M1_gpt2style                     done                         0.0848  
+   Save this session's output (Save Version) -- it is the input of later sessions.
+
+--- cell 23: OUT = "/kaggle/working/phase3_out"  (errors: 0)
+# Phase-3 outputs (generated by run_experiment.py)
+
+Output size: 0.00 GB | free disk: 23.3 GB
+
+## E1_lorma  (updated 2026-10-15 12:08:21)
+
+| job | gpu | status | dev Macro-F1 | CL | IT | minutes | note |
+|---|---|---|---|---|---|---|---|
+| M4_bloom_alibi | cpu | done | 0.0669 | 0.1200 | 0.0589 | 3.1 |  |
+| M2_llamastyle | cpu | done | 0.0669 | 0.1200 | 0.0589 | 1.1 |  |
+| M3_mistral_sliding | cpu | done | 0.0948 | 0.1024 | 0.1009 | 1.1 |  |
+| M1_gpt2style | cpu | done | 0.0848 | 0.1264 | 0.0735 | 1.3 |  |
+...
+   "dev_it_f1": 0.0589171974522293,
+   "trainable_params": 74701
+  }
+ ]
+}
+validation_report.json {
+ "ok": true,
+ "errors": [],
+ "n_docs": 6,
+ "n_labels": 213
+}
+
+--- cell 24: OUT = "/kaggle/working/phase3_out"  (errors: 0)
+phase3_out/  (0.0 MB in files here)
+  E1_lorma/  (0.0 MB in files here)
+    BEST/  (0.3 MB in files here)
+    M1_gpt2style/  (0.0 MB in files here)
+    M2_llamastyle/  (0.0 MB in files here)
+    M3_mistral_sliding/  (0.0 MB in files here)
+    M4_bloom_alibi/  (0.0 MB in files here)
+
+Upload to Codabench (validated):
+   /kaggle/working/phase3_out/E1_lorma/BEST/submission.zip
+

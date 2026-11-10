@@ -1,0 +1,7 @@
+order,experiment,technique,model_id,job,dev_macro_f1,role,path
+1,E1,full_ft,M1,M1_gpt2style,0.185454,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e5/work_E1/phase5_out/E1_full_ft/M1_gpt2style/submission/submission.zip
+2,E2,lorma,M1,M1_gpt2style,0.185454,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e5/work_E2/phase5_out/E2_lorma/M1_gpt2style/submission/submission.zip
+3,E3,adalora,M2,M2_llamastyle,0.185454,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e5/work_E3/phase5_out/E3_adalora/M2_llamastyle/submission/submission.zip
+4,E4,adapters,M3,M3_mistral_sliding,0.253086,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e5/work_E4/phase5_out/E4_adapters/M3_mistral_sliding/submission/submission.zip
+5,E5,partial_ft,M1,M1_gpt2style,0.369248,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e5/work_E5/phase5_out/E5_partial_ft/M1_gpt2style/submission/submission.zip
+6,E6,kd,M4,student_M4_bloom_alibi,0.185454,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e5/work_E6/phase5_out/E6_kd/student_M4_bloom_alibi/submission/submission.zip

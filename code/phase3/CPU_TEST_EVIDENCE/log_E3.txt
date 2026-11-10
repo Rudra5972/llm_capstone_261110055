@@ -1,0 +1,64 @@
+== E3_rslora: rsLoRA | budget 2.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   Phase-1 weights found for: ['M1', 'M2', 'M3', 'M4']
+   attention mode: causal (pilot /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/PILOT.json)
+   environment: {'python': '3.13.16', 'torch': '2.14.1+cu130', 'cuda': '13.0', 'gpus': []}
+   2 jobs on 2 worker(s) ['cpu0', 'cpu1']: ['M2_llamastyle', 'M4_bloom_alibi']
+
+[M2_llamastyle@cpu0] -- E3_rslora / M2_llamastyle (rslora, llamastyle) --
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M2_llamastyle@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[M2_llamastyle@cpu0]    [rslora] trainable 132,045 / 356,877 params (37.000%) in 60 tensors
+[M2_llamastyle@cpu0]    smoke ok: 7,136 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.1 min
+[M2_llamastyle@cpu0] projected 0.1 min train + 0.0 min probe | 120 min left in the notebook budget
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M2_llamastyle@cpu0]    [rslora] trainable 132,045 / 356,877 params (37.000%) in 60 tensors
+
+[M4_bloom_alibi@cpu1] -- E3_rslora / M4_bloom_alibi (rslora, bloom-alibi) --
+[M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu1]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[M4_bloom_alibi@cpu1]    [rslora] trainable 132,045 / 408,909 params (32.292%) in 36 tensors
+[M4_bloom_alibi@cpu1]    smoke ok: 1,340 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.3 min
+[M4_bloom_alibi@cpu1] projected 0.3 min train + 0.1 min probe | 119 min left in the notebook budget
+[M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu1]    [rslora] trainable 132,045 / 408,909 params (32.292%) in 36 tensors
+[M4_bloom_alibi@cpu1]    probe lr x0.333 (3.33e-04): dev F1 0.0669 loss 2.0350
+[M4_bloom_alibi@cpu1]    [rslora] trainable 132,045 / 408,909 params (32.292%) in 36 tensors
+[M4_bloom_alibi@cpu1]    probe lr x1 (1.00e-03): dev F1 0.0669 loss 2.0255
+[M4_bloom_alibi@cpu1]    [rslora] trainable 132,045 / 408,909 params (32.292%) in 36 tensors
+[M4_bloom_alibi@cpu1]    probe lr x3 (3.00e-03): dev F1 0.0669 loss 2.0397
+[M4_bloom_alibi@cpu1] LR probe -> lr 1.00e-03
+[M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu1]    [rslora] trainable 132,045 / 408,909 params (32.292%) in 36 tensors
+[M4_bloom_alibi@cpu1]    == epoch 1/1 | dev pooled Macro-F1 0.0669 (best) | train loss 2.0255
+[M4_bloom_alibi@cpu1]    training done: best dev Macro-F1 0.0669 at epoch 1 (0.3 min)
+[M4_bloom_alibi@cpu1]    dev Macro-F1 pooled 0.0669 | CL 0.1200 | IT 0.0589 | bias APPLIED (held-out gain +0.0129)
+[M4_bloom_alibi@cpu1]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E3_rslora/M4_bloom_alibi/submission/submission.zip (6 docs, 213 labels)
+[M4_bloom_alibi@cpu1] DONE E3 M4_bloom_alibi: dev Macro-F1 0.0669
+[M4_bloom_alibi@cpu1] finished in 1.7 min | dev pooled Macro-F1 0.0669 | output so far 0.00 GB
+   BEST of 1 -> M4_bloom_alibi (rslora), dev Macro-F1 0.0669
+[M2_llamastyle@cpu0]    overfit-32: train accuracy 1.000 after 300 steps (loss 2.574 -> 0.0051) PASS
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M2_llamastyle@cpu0]    [rslora] trainable 132,045 / 356,877 params (37.000%) in 60 tensors
+[M2_llamastyle@cpu0]    probe lr x0.333 (3.33e-04): dev F1 0.0374 loss 2.1405
+[M2_llamastyle@cpu0]    [rslora] trainable 132,045 / 356,877 params (37.000%) in 60 tensors
+[M2_llamastyle@cpu0]    probe lr x1 (1.00e-03): dev F1 0.0442 loss 2.1166
+[M2_llamastyle@cpu0]    [rslora] trainable 132,045 / 356,877 params (37.000%) in 60 tensors
+[M2_llamastyle@cpu0]    probe lr x3 (3.00e-03): dev F1 0.0115 loss 2.0983
+[M2_llamastyle@cpu0] LR probe -> lr 1.00e-03
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M2_llamastyle@cpu0]    [rslora] trainable 132,045 / 356,877 params (37.000%) in 60 tensors
+[M2_llamastyle@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.0442 (best) | train loss 2.1166
+[M2_llamastyle@cpu0]    training done: best dev Macro-F1 0.0442 at epoch 1 (0.0 min)
+[M2_llamastyle@cpu0]    dev Macro-F1 pooled 0.0442 | CL 0.0503 | IT 0.0651 | bias APPLIED (held-out gain +0.0275)
+[M2_llamastyle@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E3_rslora/M2_llamastyle/submission/submission.zip (6 docs, 213 labels)
+[M2_llamastyle@cpu0] DONE E3 M2_llamastyle: dev Macro-F1 0.0442
+[M2_llamastyle@cpu0] finished in 4.0 min | dev pooled Macro-F1 0.0442 | output so far 0.00 GB
+   BEST of 2 -> M4_bloom_alibi (rslora), dev Macro-F1 0.0669
+   BEST of 2 -> M4_bloom_alibi (rslora), dev Macro-F1 0.0669
+
+   UPLOAD: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E3_rslora/BEST/submission.zip (winner M4_bloom_alibi, dev pooled Macro-F1 0.0669) -- validated
+
+== E3_rslora finished this session in 4.1 min (exit 0)
+   M2_llamastyle                    done                         0.0442  
+   M4_bloom_alibi                   done                         0.0669  
+   Save this session's output (Save Version) -- it is the input of later sessions.

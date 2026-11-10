@@ -1,0 +1,110 @@
+{
+  "tests": {
+    "1_metrics": {
+      "result": {
+        "rouge_lcs_spans_validator": "ok"
+      },
+      "seconds": 0.0
+    },
+    "2_data_leak_split_cache": {
+      "result": {
+        "list": {
+          "train": 23,
+          "dev": 7
+        },
+        "dict": {
+          "train": 23,
+          "dev": 7
+        },
+        "wrapped": {
+          "train": 23,
+          "dev": 7
+        }
+      },
+      "seconds": 0.1
+    },
+    "3_layout": {
+      "result": {
+        "headtail": {
+          "repr": "headtail",
+          "seqs": 18
+        },
+        "head": {
+          "repr": "head",
+          "seqs": 18
+        },
+        "dancer": {
+          "repr": "dancer",
+          "seqs": 68
+        },
+        "auto": {
+          "repr": "dancer",
+          "seqs": 68
+        }
+      },
+      "seconds": 0.1
+    },
+    "4_model_techniques_decoding": {
+      "result": {
+        "M1/lorma": 48,
+        "M1/lora": 32,
+        "M1/adalora": 48,
+        "M1/adapters": 50,
+        "M1/pfeiffer": 34,
+        "M1/qlora": 32,
+        "M1/prefix": 8,
+        "M1/prompt": 1,
+        "M1/full_ft": 52,
+        "M2/lorma": 56,
+        "M2/lora": 56,
+        "M2/adalora": 84,
+        "M2/adapters": 41,
+        "M2/pfeiffer": 25,
+        "M2/qlora": 56,
+        "M2/prefix": 8,
+        "M2/prompt": 1,
+        "M2/full_ft": 38,
+        "M3/lorma": 56,
+        "M3/lora": 56,
+        "M3/adalora": 84,
+        "M3/adapters": 41,
+        "M3/pfeiffer": 25,
+        "M3/qlora": 56,
+        "M3/prefix": 8,
+        "M3/prompt": 1,
+        "M3/full_ft": 38,
+        "M4/lorma": 48,
+        "M4/lora": 32,
+        "M4/adalora": 48,
+        "M4/adapters": 50,
+        "M4/pfeiffer": 34,
+        "M4/qlora": 32,
+        "M4/prefix": 8,
+        "M4/prompt": 1,
+        "M4/full_ft": 51,
+        "nf4_rel_error": 0.09351897239685059
+      },
+      "seconds": 2.9
+    },
+    "5_overfit": {
+      "result": {
+        "passed": true,
+        "first_loss": 6.383157730102539,
+        "final_loss": 1.5394327640533447,
+        "steps": 43
+      },
+      "seconds": 8.9
+    },
+    "6_kill_resume": {
+      "result": {
+        "resumed_at_step": 3,
+        "dev_rouge1": 0.03806715949282448,
+        "test_words": 136.5
+      },
+      "seconds": 13.3
+    }
+  },
+  "failed": [],
+  "started": "2026-11-01 11:53:03",
+  "ok": true
+}

@@ -1,0 +1,23 @@
+{
+  "winner": "causal",
+  "results": {
+    "causal": {
+      "dev_macro_f1": 0.037145371097001265,
+      "dev_per_domain": {
+        "CL": 0.06055090401650285,
+        "IT": 0.0341726618705036
+      },
+      "train_minutes": 0.04755477905273438
+    },
+    "bidir": {
+      "dev_macro_f1": 0.03056588186699711,
+      "dev_per_domain": {
+        "CL": 0.03937007874015748,
+        "IT": 0.03873239436619718
+      },
+      "train_minutes": 0.04488907257715861
+    }
+  },
+  "setup": "M2 + LoRA, 1 epoch each",
+  "written": "2026-10-14 23:14:20"
+}

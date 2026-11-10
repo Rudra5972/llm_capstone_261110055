@@ -1,0 +1,11 @@
+order,experiment,technique,model_id,job,dev_score,role,path
+1,E1,lorma,M2,M2_llamastyle,0.0230769,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E1/phase6_out/E1_lorma/M2_llamastyle/submission/submission.zip
+2,E2,lora,M1,M1_gpt2style,0.0957658,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E2/phase6_out/E2_lora/M1_gpt2style/submission/submission.zip
+3,E3,adalora,M2,M2_llamastyle,0.0230769,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E3/phase6_out/E3_adalora/M2_llamastyle/submission/submission.zip
+4,E4,adapters,M4,M4_bloom_alibi,0.116805,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E4/phase6_out/E4_houlsby/M4_bloom_alibi/submission/submission.zip
+5,E5,pfeiffer,M3,M3_mistral_sliding,0.173679,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E5/phase6_out/E5_pfeiffer/M3_mistral_sliding/submission/submission.zip
+6,E6,kd,M1,student_M1_gpt2style,0.170055,required,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E6/phase6_out/E6_kd/student_M1_gpt2style/submission/submission.zip
+7,E4,adapters,M1,M1_gpt2style,0.0153846,optional extra,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E4/phase6_out/E4_houlsby/M1_gpt2style/submission/submission.zip
+8,E2,lora,M2,M2_llamastyle,0.0856826,optional extra,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E2/phase6_out/E2_lora/M2_llamastyle/submission/submission.zip
+9,E1,lorma,M3,M3_mistral_sliding,0,optional extra,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E1/phase6_out/E1_lorma/M3_mistral_sliding/submission/submission.zip
+10,E5,pfeiffer,M4,M4_bloom_alibi,0.078125,optional extra,/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e/work_E5/phase6_out/E5_pfeiffer/M4_bloom_alibi/submission/submission.zip

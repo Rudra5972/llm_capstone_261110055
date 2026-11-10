@@ -1,0 +1,67 @@
+== E9_prompt: Prompt Tuning | budget 2.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   Phase-1 weights found for: ['M1', 'M2', 'M3', 'M4']
+   attention mode: causal (pilot /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/PILOT.json)
+   environment: {'python': '3.13.16', 'torch': '2.14.1+cu130', 'cuda': '13.0', 'gpus': []}
+   2 jobs on 2 worker(s) ['cpu0', 'cpu1']: ['M2_llamastyle', 'M4_bloom_alibi']
+
+[M2_llamastyle@cpu0] -- E9_prompt / M2_llamastyle (prompt, llamastyle) --
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 250 | max tokens 1001
+[M2_llamastyle@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct', 'virtual_token_visibility']
+[M2_llamastyle@cpu0]    [prompt] trainable 2,253 / 227,085 params (0.992%) in 5 tensors
+[M2_llamastyle@cpu0]    smoke ok: 15,900 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.0 min
+[M2_llamastyle@cpu0] projected 0.0 min train + 0.0 min probe | 120 min left in the notebook budget
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 250 | max tokens 1001
+[M2_llamastyle@cpu0]    [prompt] trainable 2,253 / 227,085 params (0.992%) in 5 tensors
+
+[M4_bloom_alibi@cpu1] -- E9_prompt / M4_bloom_alibi (prompt, bloom-alibi) --
+[M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 250 | max tokens 1001
+[M4_bloom_alibi@cpu1]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct', 'virtual_token_visibility']
+[M4_bloom_alibi@cpu1]    [prompt] trainable 2,253 / 279,117 params (0.807%) in 5 tensors
+[M4_bloom_alibi@cpu1]    smoke ok: 1,796 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.4 min
+[M4_bloom_alibi@cpu1] projected 0.4 min train + 0.2 min probe | 119 min left in the notebook budget
+[M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 250 | max tokens 1001
+[M4_bloom_alibi@cpu1]    [prompt] trainable 2,253 / 279,117 params (0.807%) in 5 tensors
+[M4_bloom_alibi@cpu1]    probe lr x0.333 (1.00e-03): dev F1 0.0509 loss 2.0687
+[M4_bloom_alibi@cpu1]    [prompt] trainable 2,253 / 279,117 params (0.807%) in 5 tensors
+[M4_bloom_alibi@cpu1]    probe lr x1 (3.00e-03): dev F1 0.0508 loss 2.0683
+[M4_bloom_alibi@cpu1]    [prompt] trainable 2,253 / 279,117 params (0.807%) in 5 tensors
+[M4_bloom_alibi@cpu1]    probe lr x3 (9.00e-03): dev F1 0.0529 loss 2.0676
+[M4_bloom_alibi@cpu1] LR probe -> lr 9.00e-03
+[M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 250 | max tokens 1001
+[M4_bloom_alibi@cpu1]    [prompt] trainable 2,253 / 279,117 params (0.807%) in 5 tensors
+[M4_bloom_alibi@cpu1]    == epoch 1/2 | dev pooled Macro-F1 0.0569 (best) | train loss 2.0676
+[M4_bloom_alibi@cpu1]    == epoch 2/2 | dev pooled Macro-F1 0.0843 (best) | train loss 1.9346
+[M4_bloom_alibi@cpu1]    training done: best dev Macro-F1 0.0843 at epoch 2 (0.3 min)
+[M4_bloom_alibi@cpu1]    dev Macro-F1 pooled 0.0843 | CL 0.1373 | IT 0.0839 | bias not applied (held-out gain -0.0481)
+[M4_bloom_alibi@cpu1]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/E9_prompt/M4_bloom_alibi/submission/submission.zip (6 docs, 213 labels)
+[M4_bloom_alibi@cpu1] DONE E9 M4_bloom_alibi: dev Macro-F1 0.0843
+[M4_bloom_alibi@cpu1] finished in 1.5 min | dev pooled Macro-F1 0.0843 | output so far 0.00 GB
+   BEST of 1 -> M4_bloom_alibi (prompt), dev Macro-F1 0.0843
+[M2_llamastyle@cpu0]    overfit-32: train accuracy 0.875 after 300 steps (loss 2.561 -> 0.2412) FAIL
+[M2_llamastyle@cpu0] overfit-32 FAILED (warning only)
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 250 | max tokens 1001
+[M2_llamastyle@cpu0]    [prompt] trainable 2,253 / 227,085 params (0.992%) in 5 tensors
+[M2_llamastyle@cpu0]    probe lr x0.333 (1.00e-03): dev F1 0.0691 loss 2.0979
+[M2_llamastyle@cpu0]    [prompt] trainable 2,253 / 227,085 params (0.992%) in 5 tensors
+[M2_llamastyle@cpu0]    probe lr x1 (3.00e-03): dev F1 0.0696 loss 2.0963
+[M2_llamastyle@cpu0]    [prompt] trainable 2,253 / 227,085 params (0.992%) in 5 tensors
+[M2_llamastyle@cpu0]    probe lr x3 (9.00e-03): dev F1 0.0669 loss 2.0934
+[M2_llamastyle@cpu0] LR probe -> lr 3.00e-03
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 250 | max tokens 1001
+[M2_llamastyle@cpu0]    [prompt] trainable 2,253 / 227,085 params (0.992%) in 5 tensors
+[M2_llamastyle@cpu0]    == epoch 1/2 | dev pooled Macro-F1 0.0669 (best) | train loss 2.0963
+[M2_llamastyle@cpu0]    == epoch 2/2 | dev pooled Macro-F1 0.0669  | train loss 1.9541
+[M2_llamastyle@cpu0]    training done: best dev Macro-F1 0.0669 at epoch 1 (0.0 min)
+[M2_llamastyle@cpu0]    dev Macro-F1 pooled 0.0669 | CL 0.1200 | IT 0.0589 | bias not applied (held-out gain -0.0041)
+[M2_llamastyle@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/E9_prompt/M2_llamastyle/submission/submission.zip (6 docs, 213 labels)
+[M2_llamastyle@cpu0] DONE E9 M2_llamastyle: dev Macro-F1 0.0669
+[M2_llamastyle@cpu0] finished in 2.6 min | dev pooled Macro-F1 0.0669 | output so far 0.00 GB
+   BEST of 2 -> M4_bloom_alibi (prompt), dev Macro-F1 0.0843
+   BEST of 2 -> M4_bloom_alibi (prompt), dev Macro-F1 0.0843
+
+   UPLOAD: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/E9_prompt/BEST/submission.zip (winner M4_bloom_alibi, dev pooled Macro-F1 0.0843) -- validated
+
+== E9_prompt finished this session in 2.7 min (exit 0)
+   M2_llamastyle                    done                         0.0669  
+   M4_bloom_alibi                   done                         0.0843  
+   Save this session's output (Save Version) -- it is the input of later sessions.

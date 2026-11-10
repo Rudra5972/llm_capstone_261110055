@@ -1,0 +1,83 @@
+{
+  "P0": {
+    "exit": 0,
+    "status": {
+      "smoke_full_ft_M4_bloom_alibi": "SMOKE_OK",
+      "smoke_lorma_M4_bloom_alibi": "SMOKE_OK",
+      "smoke_adalora_M4_bloom_alibi": "SMOKE_OK",
+      "smoke_adapters_M4_bloom_alibi": "SMOKE_OK",
+      "smoke_partial_ft_M4_bloom_alibi": "SMOKE_OK"
+    }
+  },
+  "E1": {
+    "exit": 0,
+    "status": {
+      "M4_bloom_alibi": "DONE",
+      "M2_llamastyle": "DONE",
+      "M3_mistral_sliding": "DONE",
+      "M1_gpt2style": "DONE"
+    }
+  },
+  "E2": {
+    "exit": 0,
+    "status": {
+      "M4_bloom_alibi": "DONE",
+      "M2_llamastyle": "DONE",
+      "M3_mistral_sliding": "DONE",
+      "M1_gpt2style": "DONE"
+    }
+  },
+  "E3": {
+    "exit": 0,
+    "status": {
+      "M4_bloom_alibi": "DONE",
+      "M2_llamastyle": "DONE",
+      "M3_mistral_sliding": "DONE",
+      "M1_gpt2style": "DONE"
+    }
+  },
+  "E4": {
+    "exit": 0,
+    "status": {
+      "M4_bloom_alibi": "DONE",
+      "M2_llamastyle": "DONE",
+      "M3_mistral_sliding": "DONE",
+      "M1_gpt2style": "DONE"
+    }
+  },
+  "E5": {
+    "exit": 0,
+    "status": {
+      "M4_bloom_alibi": "DONE",
+      "M2_llamastyle": "DONE",
+      "M3_mistral_sliding": "DONE",
+      "M1_gpt2style": "DONE"
+    }
+  },
+  "E6": {
+    "exit": 0,
+    "status": {
+      "teacher_M4_bloom_alibi": "DONE",
+      "student_M4_bloom_alibi": "DONE",
+      "student_M2_llamastyle": "DONE",
+      "student_M3_mistral_sliding": "DONE",
+      "student_M1_gpt2style": "DONE"
+    }
+  },
+  "E7": {
+    "exit": 0,
+    "status": {
+      "bitfit_M4_bloom_alibi": "DONE",
+      "bitfit_M1_gpt2style": "DONE",
+      "lora_M4_bloom_alibi": "DONE",
+      "repr_headtail_M4_bloom_alibi": "DONE",
+      "repr_last_k_M4_bloom_alibi": "DONE",
+      "repr_sections_M4_bloom_alibi": "DONE",
+      "cw_none_M4_bloom_alibi": "DONE"
+    }
+  },
+  "E8": {
+    "exit": 0,
+    "status": {}
+  }
+}

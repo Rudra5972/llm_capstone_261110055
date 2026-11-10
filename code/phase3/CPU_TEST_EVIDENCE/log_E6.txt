@@ -1,0 +1,144 @@
+== E6_kd: Knowledge distillation (self-contained full-FT teacher -> pruned student) | budget 2.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   Phase-1 weights found for: ['M1', 'M2', 'M3', 'M4']
+   attention mode: causal (pilot /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/PILOT.json)
+   environment: {'python': '3.13.16', 'torch': '2.14.1+cu130', 'cuda': '13.0', 'gpus': []}
+   4 jobs on 2 worker(s) ['cpu0', 'cpu1']: ['teacher_M2_llamastyle', 'teacher_M4_bloom_alibi', 'M2_llamastyle', 'M4_bloom_alibi']
+
+[teacher_M2_llamastyle@cpu0] -- E6_kd / teacher_M2_llamastyle (full_ft, llamastyle) --
+[teacher_M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[teacher_M2_llamastyle@cpu0]    job self-checks passed: ['output_lengths']
+[teacher_M2_llamastyle@cpu0]    [full_ft] trainable 225,805 / 225,805 params (100.000%) in 42 tensors
+[teacher_M2_llamastyle@cpu0]    smoke ok: 8,916 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.3 min
+[teacher_M2_llamastyle@cpu0] projected 0.3 min train + 0.1 min probe | 120 min left in the notebook budget
+[teacher_M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[teacher_M2_llamastyle@cpu0]    [full_ft] trainable 225,805 / 225,805 params (100.000%) in 42 tensors
+
+[teacher_M4_bloom_alibi@cpu1] -- E6_kd / teacher_M4_bloom_alibi (full_ft, bloom-alibi) --
+[teacher_M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[teacher_M4_bloom_alibi@cpu1]    job self-checks passed: ['output_lengths']
+[teacher_M4_bloom_alibi@cpu1]    [full_ft] trainable 277,837 / 277,837 params (100.000%) in 55 tensors
+[teacher_M4_bloom_alibi@cpu1]    smoke ok: 1,763 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 1.4 min
+[teacher_M4_bloom_alibi@cpu1] projected 1.4 min train + 0.6 min probe | 119 min left in the notebook budget
+[teacher_M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[teacher_M4_bloom_alibi@cpu1]    [full_ft] trainable 277,837 / 277,837 params (100.000%) in 55 tensors
+[teacher_M4_bloom_alibi@cpu1]    probe lr x0.333 (1.67e-05): dev F1 0.0502 loss 2.1098
+[teacher_M4_bloom_alibi@cpu1]    [full_ft] trainable 277,837 / 277,837 params (100.000%) in 55 tensors
+[teacher_M4_bloom_alibi@cpu1]    probe lr x1 (5.00e-05): dev F1 0.0856 loss 2.0687
+[teacher_M4_bloom_alibi@cpu1]    [full_ft] trainable 277,837 / 277,837 params (100.000%) in 55 tensors
+[teacher_M4_bloom_alibi@cpu1]    probe lr x3 (1.50e-04): dev F1 0.0669 loss 2.0181
+[teacher_M4_bloom_alibi@cpu1] LR probe -> lr 5.00e-05
+[teacher_M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[teacher_M4_bloom_alibi@cpu1]    [full_ft] trainable 277,837 / 277,837 params (100.000%) in 55 tensors
+[teacher_M4_bloom_alibi@cpu1]    == epoch 1/6 | dev pooled Macro-F1 0.0667 (best) | train loss 2.0687
+[teacher_M4_bloom_alibi@cpu1]    == epoch 2/6 | dev pooled Macro-F1 0.0669 (best) | train loss 2.0100
+[teacher_M4_bloom_alibi@cpu1]    == epoch 3/6 | dev pooled Macro-F1 0.0669  | train loss 1.9871
+[teacher_M4_bloom_alibi@cpu1]    == epoch 4/6 | dev pooled Macro-F1 0.0669  | train loss 1.9156
+[teacher_M4_bloom_alibi@cpu1]    == epoch 5/6 | dev pooled Macro-F1 0.0669  | train loss 1.9281
+[teacher_M4_bloom_alibi@cpu1]    == epoch 6/6 | dev pooled Macro-F1 0.0669  | train loss 1.8853
+[teacher_M4_bloom_alibi@cpu1]    training early_stop: best dev Macro-F1 0.0669 at epoch 2 (1.1 min)
+[teacher_M4_bloom_alibi@cpu1]    dev Macro-F1 pooled 0.0669 | CL 0.1200 | IT 0.0589 | bias not applied (held-out gain -0.0193)
+[teacher_M4_bloom_alibi@cpu1]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/teacher_M4_bloom_alibi/submission/submission.zip (6 docs, 213 labels)
+[teacher_M4_bloom_alibi@cpu1] DONE E6 teacher_M4_bloom_alibi: dev Macro-F1 0.0669
+[teacher_M4_bloom_alibi@cpu1] finished in 2.8 min | dev pooled Macro-F1 0.0669 | output so far 0.01 GB
+   no finished run with a valid submission yet -- nothing to select
+
+[M4_bloom_alibi@cpu1] -- E6_kd / M4_bloom_alibi (kd, bloom-alibi) --
+[M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu1]    job self-checks passed: ['output_lengths']
+[M4_bloom_alibi@cpu1]    [kd] trainable 177,869 / 177,869 params (100.000%) in 31 tensors
+[M4_bloom_alibi@cpu1]    [kd] student 0.2M params < teacher 0.3M (0.64x)
+[M4_bloom_alibi@cpu1]    [kd] teacher outputs cached for 17 windows -> /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M4_bloom_alibi/teacher_cache.pt
+[M4_bloom_alibi@cpu1]    smoke ok: 2,301 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.2 min
+[M4_bloom_alibi@cpu1] projected 0.2 min train + 0.1 min probe | 117 min left in the notebook budget
+[M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu1]    [kd] trainable 177,869 / 177,869 params (100.000%) in 31 tensors
+[M4_bloom_alibi@cpu1]    [kd] student 0.2M params < teacher 0.3M (0.64x)
+[M4_bloom_alibi@cpu1]    [kd] teacher cache reused: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M4_bloom_alibi/teacher_cache.pt
+[M4_bloom_alibi@cpu1]    probe lr x0.333 (3.33e-05): dev F1 0.0876 loss 1.0524
+[M4_bloom_alibi@cpu1]    [kd] trainable 177,869 / 177,869 params (100.000%) in 31 tensors
+[M4_bloom_alibi@cpu1]    [kd] student 0.2M params < teacher 0.3M (0.64x)
+[M4_bloom_alibi@cpu1]    [kd] teacher cache reused: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M4_bloom_alibi/teacher_cache.pt
+[M4_bloom_alibi@cpu1]    probe lr x1 (1.00e-04): dev F1 0.0669 loss 1.0230
+[M4_bloom_alibi@cpu1]    [kd] trainable 177,869 / 177,869 params (100.000%) in 31 tensors
+[M4_bloom_alibi@cpu1]    [kd] student 0.2M params < teacher 0.3M (0.64x)
+[M4_bloom_alibi@cpu1]    [kd] teacher cache reused: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M4_bloom_alibi/teacher_cache.pt
+[M4_bloom_alibi@cpu1]    probe lr x3 (3.00e-04): dev F1 0.0669 loss 1.0008
+[M4_bloom_alibi@cpu1] LR probe -> lr 3.33e-05
+[M4_bloom_alibi@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu1]    [kd] trainable 177,869 / 177,869 params (100.000%) in 31 tensors
+[M4_bloom_alibi@cpu1]    [kd] student 0.2M params < teacher 0.3M (0.64x)
+[M4_bloom_alibi@cpu1]    [kd] teacher cache reused: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M4_bloom_alibi/teacher_cache.pt
+[M4_bloom_alibi@cpu1]    == epoch 1/1 | dev pooled Macro-F1 0.0876 (best) | train loss 1.0524
+[M4_bloom_alibi@cpu1]    training done: best dev Macro-F1 0.0876 at epoch 1 (0.1 min)
+[M4_bloom_alibi@cpu1]    dev Macro-F1 pooled 0.0876 | CL 0.1494 | IT 0.0818 | bias not applied (held-out gain -0.0303)
+[M4_bloom_alibi@cpu1]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M4_bloom_alibi/submission/submission.zip (6 docs, 213 labels)
+[M4_bloom_alibi@cpu1] DONE E6 M4_bloom_alibi: dev Macro-F1 0.0876
+[M4_bloom_alibi@cpu1] finished in 1.1 min | dev pooled Macro-F1 0.0876 | output so far 0.01 GB
+   BEST of 1 -> M4_bloom_alibi (kd), dev Macro-F1 0.0876
+[teacher_M2_llamastyle@cpu0]    overfit-32: train accuracy 1.000 after 300 steps (loss 2.574 -> 0.0001) PASS
+[teacher_M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[teacher_M2_llamastyle@cpu0]    [full_ft] trainable 225,805 / 225,805 params (100.000%) in 42 tensors
+[teacher_M2_llamastyle@cpu0]    probe lr x0.333 (1.67e-05): dev F1 0.0000 loss 2.1760
+[teacher_M2_llamastyle@cpu0]    [full_ft] trainable 225,805 / 225,805 params (100.000%) in 42 tensors
+[teacher_M2_llamastyle@cpu0]    probe lr x1 (5.00e-05): dev F1 0.0000 loss 2.1641
+[teacher_M2_llamastyle@cpu0]    [full_ft] trainable 225,805 / 225,805 params (100.000%) in 42 tensors
+[teacher_M2_llamastyle@cpu0]    probe lr x3 (1.50e-04): dev F1 0.0463 loss 2.1308
+[teacher_M2_llamastyle@cpu0] LR probe -> lr 1.50e-04
+[teacher_M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[teacher_M2_llamastyle@cpu0]    [full_ft] trainable 225,805 / 225,805 params (100.000%) in 42 tensors
+[teacher_M2_llamastyle@cpu0]    == epoch 1/6 | dev pooled Macro-F1 0.0658 (best) | train loss 2.1308
+[teacher_M2_llamastyle@cpu0]    == epoch 2/6 | dev pooled Macro-F1 0.0669 (best) | train loss 2.0005
+[teacher_M2_llamastyle@cpu0]    == epoch 3/6 | dev pooled Macro-F1 0.0669  | train loss 1.9387
+[teacher_M2_llamastyle@cpu0]    == epoch 4/6 | dev pooled Macro-F1 0.0669  | train loss 1.8471
+[teacher_M2_llamastyle@cpu0]    == epoch 5/6 | dev pooled Macro-F1 0.0669  | train loss 1.8442
+[teacher_M2_llamastyle@cpu0]    == epoch 6/6 | dev pooled Macro-F1 0.0669  | train loss 1.7945
+[teacher_M2_llamastyle@cpu0]    training early_stop: best dev Macro-F1 0.0669 at epoch 2 (0.2 min)
+[teacher_M2_llamastyle@cpu0]    dev Macro-F1 pooled 0.0669 | CL 0.1200 | IT 0.0589 | bias not applied (held-out gain +0.0000)
+[teacher_M2_llamastyle@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/teacher_M2_llamastyle/submission/submission.zip (6 docs, 213 labels)
+[teacher_M2_llamastyle@cpu0] DONE E6 teacher_M2_llamastyle: dev Macro-F1 0.0669
+[teacher_M2_llamastyle@cpu0] finished in 5.5 min | dev pooled Macro-F1 0.0669 | output so far 0.01 GB
+   BEST of 1 -> M4_bloom_alibi (kd), dev Macro-F1 0.0876
+
+[M2_llamastyle@cpu0] -- E6_kd / M2_llamastyle (kd, llamastyle) --
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M2_llamastyle@cpu0]    job self-checks passed: ['output_lengths']
+[M2_llamastyle@cpu0]    [kd] trainable 151,821 / 151,821 params (100.000%) in 24 tensors
+[M2_llamastyle@cpu0]    [kd] student 0.2M params < teacher 0.2M (0.67x)
+[M2_llamastyle@cpu0]    [kd] teacher outputs cached for 17 windows -> /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M2_llamastyle/teacher_cache.pt
+[M2_llamastyle@cpu0]    smoke ok: 21,978 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.0 min
+[M2_llamastyle@cpu0] projected 0.0 min train + 0.0 min probe | 114 min left in the notebook budget
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M2_llamastyle@cpu0]    [kd] trainable 151,821 / 151,821 params (100.000%) in 24 tensors
+[M2_llamastyle@cpu0]    [kd] student 0.2M params < teacher 0.2M (0.67x)
+[M2_llamastyle@cpu0]    [kd] teacher cache reused: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M2_llamastyle/teacher_cache.pt
+[M2_llamastyle@cpu0]    probe lr x0.333 (3.33e-05): dev F1 0.0000 loss 1.1163
+[M2_llamastyle@cpu0]    [kd] trainable 151,821 / 151,821 params (100.000%) in 24 tensors
+[M2_llamastyle@cpu0]    [kd] student 0.2M params < teacher 0.2M (0.67x)
+[M2_llamastyle@cpu0]    [kd] teacher cache reused: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M2_llamastyle/teacher_cache.pt
+[M2_llamastyle@cpu0]    probe lr x1 (1.00e-04): dev F1 0.0000 loss 1.1013
+[M2_llamastyle@cpu0]    [kd] trainable 151,821 / 151,821 params (100.000%) in 24 tensors
+[M2_llamastyle@cpu0]    [kd] student 0.2M params < teacher 0.2M (0.67x)
+[M2_llamastyle@cpu0]    [kd] teacher cache reused: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M2_llamastyle/teacher_cache.pt
+[M2_llamastyle@cpu0]    probe lr x3 (3.00e-04): dev F1 0.0784 loss 1.0649
+[M2_llamastyle@cpu0] LR probe -> lr 3.00e-04
+[M2_llamastyle@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M2_llamastyle@cpu0]    [kd] trainable 151,821 / 151,821 params (100.000%) in 24 tensors
+[M2_llamastyle@cpu0]    [kd] student 0.2M params < teacher 0.2M (0.67x)
+[M2_llamastyle@cpu0]    [kd] teacher cache reused: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M2_llamastyle/teacher_cache.pt
+[M2_llamastyle@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.0784 (best) | train loss 1.0649
+[M2_llamastyle@cpu0]    training done: best dev Macro-F1 0.0784 at epoch 1 (0.0 min)
+[M2_llamastyle@cpu0]    dev Macro-F1 pooled 0.0791 | CL 0.1404 | IT 0.0712 | bias not applied (held-out gain -0.0009)
+[M2_llamastyle@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/M2_llamastyle/submission/submission.zip (6 docs, 213 labels)
+[M2_llamastyle@cpu0] DONE E6 M2_llamastyle: dev Macro-F1 0.0791
+[M2_llamastyle@cpu0] finished in 0.3 min | dev pooled Macro-F1 0.0791 | output so far 0.01 GB
+   BEST of 2 -> M4_bloom_alibi (kd), dev Macro-F1 0.0876
+   BEST of 2 -> M4_bloom_alibi (kd), dev Macro-F1 0.0876
+
+   UPLOAD: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E6_kd/BEST/submission.zip (winner M4_bloom_alibi, dev pooled Macro-F1 0.0876) -- validated
+
+== E6_kd finished this session in 5.9 min (exit 0)
+   teacher_M2_llamastyle            done                         0.0669  
+   teacher_M4_bloom_alibi           done                         0.0669  
+   M2_llamastyle                    done                         0.0791  
+   M4_bloom_alibi                   done                         0.0876  
+   Save this session's output (Save Version) -- it is the input of later sessions.

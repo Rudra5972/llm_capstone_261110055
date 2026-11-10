@@ -1,0 +1,9 @@
+selftest exit 0
+P0 exit 0
+E5 exit 0
+E8 exit 0
+E9 exit 0
+E6 exit 0
+E11 exit 0
+coverage exit 0
+ALLDONE

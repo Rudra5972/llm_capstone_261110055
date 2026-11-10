@@ -1,0 +1,55 @@
+== E5_adalora: AdaLoRA | budget 11.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   Phase-1 weights found for: ['M1', 'M2', 'M3', 'M4']
+   attention mode: causal (pilot /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out2/PILOT.json)
+   environment: {'python': '3.13.16', 'torch': '2.14.1+cu130', 'cuda': '13.0', 'gpus': []}
+   2 jobs on 2 worker(s) ['cpu0', 'cpu1']: ['M4_bloom_alibi', 'M2_llamastyle']
+
+[M4_bloom_alibi@cpu0] -- E5_adalora / M4_bloom_alibi (adalora, bloom-alibi) --
+[M4_bloom_alibi@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[M4_bloom_alibi@cpu0]    [adalora] 16 matrices, rank 12 -> target 8 (budget 192 -> 128 singular values)
+[M4_bloom_alibi@cpu0]    [adalora] trainable 50,317 / 327,181 params (15.379%) in 52 tensors
+[M4_bloom_alibi@cpu0]    smoke ok: 5,957 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.3 min
+[M4_bloom_alibi@cpu0] projected 0.3 min train + 0.0 min probe | 660 min left in the notebook budget
+[M4_bloom_alibi@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M4_bloom_alibi@cpu0]    [adalora] 16 matrices, rank 12 -> target 8 (budget 192 -> 128 singular values)
+[M4_bloom_alibi@cpu0]    [adalora] trainable 50,317 / 327,181 params (15.379%) in 52 tensors
+
+[M2_llamastyle@cpu1] -- E5_adalora / M2_llamastyle (adalora, llamastyle) --
+[M4_bloom_alibi@cpu0]    == epoch 1/4 | dev pooled Macro-F1 0.0658  (not selectable yet) | train loss 3.9109
+[M2_llamastyle@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M2_llamastyle@cpu1]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[M2_llamastyle@cpu1]    [adalora] 28 matrices, rank 12 -> target 8 (budget 336 -> 224 singular values)
+[M2_llamastyle@cpu1]    [adalora] trainable 50,461 / 275,293 params (18.330%) in 88 tensors
+[M4_bloom_alibi@cpu0]    == epoch 2/4 | dev pooled Macro-F1 0.0722  (not selectable yet) | train loss 3.8073
+[M4_bloom_alibi@cpu0]    == epoch 3/4 | dev pooled Macro-F1 0.0758  (not selectable yet) | train loss 3.7476
+[M4_bloom_alibi@cpu0]    == epoch 4/4 | dev pooled Macro-F1 0.0829 (best) | train loss 3.6853
+[M4_bloom_alibi@cpu0]    training done: best dev Macro-F1 0.0829 at epoch 4 (1.2 min)
+[M4_bloom_alibi@cpu0]    dev Macro-F1 pooled 0.0829 | CL 0.1198 | IT 0.0915 | bias not applied (held-out gain -0.0495)
+[M4_bloom_alibi@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out2/E5_adalora/M4_bloom_alibi/submission/submission.zip (6 docs, 213 labels)
+[M4_bloom_alibi@cpu0] DONE E5 M4_bloom_alibi: dev Macro-F1 0.0829
+[M4_bloom_alibi@cpu0] finished in 1.7 min | dev pooled Macro-F1 0.0829 | output so far 0.00 GB
+   BEST of 1 -> M4_bloom_alibi (adalora), dev Macro-F1 0.0829
+[M2_llamastyle@cpu1]    smoke ok: 806 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 2.0 min
+[M2_llamastyle@cpu1] projected 2.0 min train + 0.0 min probe | 658 min left in the notebook budget
+[M2_llamastyle@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[M2_llamastyle@cpu1]    [adalora] 28 matrices, rank 12 -> target 8 (budget 336 -> 224 singular values)
+[M2_llamastyle@cpu1]    [adalora] trainable 50,461 / 275,293 params (18.330%) in 88 tensors
+[M2_llamastyle@cpu1]    == epoch 1/4 | dev pooled Macro-F1 0.0020  (not selectable yet) | train loss 4.0381
+[M2_llamastyle@cpu1]    == epoch 2/4 | dev pooled Macro-F1 0.0671  (not selectable yet) | train loss 3.9495
+[M2_llamastyle@cpu1]    == epoch 3/4 | dev pooled Macro-F1 0.0669  (not selectable yet) | train loss 3.8629
+[M2_llamastyle@cpu1]    == epoch 4/4 | dev pooled Macro-F1 0.0669 (best) | train loss 3.8191
+[M2_llamastyle@cpu1]    training done: best dev Macro-F1 0.0669 at epoch 4 (0.2 min)
+[M2_llamastyle@cpu1]    dev Macro-F1 pooled 0.0669 | CL 0.1200 | IT 0.0589 | bias not applied (held-out gain +0.0000)
+[M2_llamastyle@cpu1]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out2/E5_adalora/M2_llamastyle/submission/submission.zip (6 docs, 213 labels)
+[M2_llamastyle@cpu1] DONE E5 M2_llamastyle: dev Macro-F1 0.0669
+[M2_llamastyle@cpu1] finished in 1.8 min | dev pooled Macro-F1 0.0669 | output so far 0.00 GB
+   BEST of 2 -> M4_bloom_alibi (adalora), dev Macro-F1 0.0829
+   BEST of 2 -> M4_bloom_alibi (adalora), dev Macro-F1 0.0829
+
+   UPLOAD: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out2/E5_adalora/BEST/submission.zip (winner M4_bloom_alibi, dev pooled Macro-F1 0.0829) -- validated
+
+== E5_adalora finished this session in 2.1 min (exit 0)
+   M4_bloom_alibi                   done                         0.0829  
+   M2_llamastyle                    done                         0.0669  
+   Save this session's output (Save Version) -- it is the input of later sessions.

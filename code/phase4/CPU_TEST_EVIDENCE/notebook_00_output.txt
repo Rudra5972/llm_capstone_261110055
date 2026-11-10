@@ -1,0 +1,157 @@
+3.13.16 2026-10-21 07:02:35
+torch 2.14.1+cu130 | GPUs: 0 []
+inputs: ['01-train-gpt2style', '02-train-llamastyle', '03-train-mistral-sliding', '04-train-bloom-alibi', 'phase4-cjpe-data']
+Writing /kaggle/working/phase4/bpe_tokenizer.py
+Writing /kaggle/working/phase4/phase1_models.py
+Writing /kaggle/working/phase4/ner_common.py
+Writing /kaggle/working/phase4/ner_models.py
+Writing /kaggle/working/phase4/ner_peft.py
+Writing /kaggle/working/phase4/cjpe_common.py
+Writing /kaggle/working/phase4/cjpe_data.py
+Writing /kaggle/working/phase4/cjpe_tok.py
+Writing /kaggle/working/phase4/cjpe_models.py
+Writing /kaggle/working/phase4/cjpe_peft.py
+Writing /kaggle/working/phase4/cjpe_eval.py
+Writing /kaggle/working/phase4/cjpe_kd.py
+Writing /kaggle/working/phase4/cjpe_train.py
+Writing /kaggle/working/phase4/cjpe_predict.py
+Writing /kaggle/working/phase4/validate_submission.py
+Writing /kaggle/working/phase4/select_best.py
+Writing /kaggle/working/phase4/aggregate.py
+Writing /kaggle/working/phase4/run_experiment.py
+Writing /kaggle/working/phase4/selftest.py
+all 19 modules verified
+Phase-1 weights: {
+ "M1": "/kaggle/input/01-train-gpt2style/p1_M1/final",
+ "M2": "/kaggle/input/02-train-llamastyle/p1_M2/final",
+ "M3": "/kaggle/input/03-train-mistral-sliding/p1_M3/final",
+ "M4": "/kaggle/input/04-train-bloom-alibi/p1_M4/final"
+}
+train.json -> ['/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Train/train.json']
+dev.json -> ['/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Train/dev.json']
+test.json -> ['/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Test/test.json']
+HF secret found: no
+earlier phase4_out inputs: []
+=== Phase 4 P0: Optional data audit, token cache, selftest and GPU smoke | 2026-10-21 07:02:37 | budget 0.6 h | 0 GPU(s) | free disk 23 GB ===
+   [phase1] M1 gpt2style        -> /kaggle/input/01-train-gpt2style/p1_M1/final
+   [phase1] M2 llamastyle       -> /kaggle/input/02-train-llamastyle/p1_M2/final
+   [phase1] M3 mistral-sliding  -> /kaggle/input/03-train-mistral-sliding/p1_M3/final
+   [phase1] M4 bloom-alibi      -> /kaggle/input/04-train-bloom-alibi/p1_M4/final
+   [attn] bidir (default; no PILOT.json attached)
+   [data] source: kaggle_dataset: {'train': '/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Train/train.json', 'dev': '/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Train/dev.json', 'test': '/kaggle/input/phase4-cjpe-data/Phase_4_CJPE/Test/test.json'}
+   [data] train: 61 records, list of objects, keys id='id' text='text' label='label'
+   [data] dev: 20 records, list of objects, keys id='id' text='text' label='label'
+   [data] test: 20 records, list of objects, keys id='id' text='text' label=None
+   [example] train: id='train_0000' label=0 text='reasons evidence facts facts appellant conviction appeal counsel issue . therefore (1) dismissed evidence the order accordingly dismissed THE appeal held the court appeal section held (1) bail conviction    supreme high bail that the facts the reasons court ORDER issue , section counsel appellant le'
+   [example] dev: id='dev_0000' label=0 text='respondent court facts the evidence that witness judgment respondent counsel counsel court evidence (1) supreme section dismissed held bail reasons act respondent therefore allowed supreme high conviction state evidence reasons petition\n\nORDER\n the appeal is dismissed and the conviction stands . the'
+   [example] test: id='test_0000' label=None text='judgment the accused appeal bail SENTENCE that judgment that the ACCORDINGLY evidence facts BAIL the supreme reasons the witness SECTION order appellant ORDER accused court that ISSUE that 12/2003 accused sentence high (1) supreme that accused allowed \n bail accordingly DISMISSED section bail . dism'
+   !!! [leak-guard] 1 train case(s) also occur in test -> DROPPED from train (ids ['train_leak_0']...)
+   [audit] token statistics in 0s
+   [audit] split   n      empty dup_id dup_text  pos_rate  chars(median)
+   [audit] train      61      0      0        0     0.508  3,352
+   [audit] dev        20      0      0        0     0.500  3,365
+   [audit] test       20      0      0        0            7,288
+   [audit] chars/token 6.81 (sample of 100)
+   [audit] train tokens: median 503, p90 2,934, max 2,971; >512 47%  >1024 45%  >2048 28%  >4096 0%
+   [audit] dev tokens: median 518, p90 2,874, max 2,898; >512 50%  >1024 45%  >2048 15%  >4096 0%
+   [audit] test tokens: median 1,086, p90 2,929, max 2,954; >512 65%  >1024 65%  >2048 35%  >4096 0%
+   [leak-guard] train x test {'id': 0, 'sha1': 1, 'norm': 1}, dev x test {'id': 0, 'sha1': 0, 'norm': 0}, train x dev {'id': 0, 'sha1': 0, 'norm': 0}; dropped train 1, dev 0
+   [cache] building (key 9ee98854dac9f5071x0, head 2044 / tail 2044 tokens per document, 2 processes) ...
+   [cache] train: 60 docs tokenised (0s so far)
+   [cache] dev: 20 docs tokenised (0s so far)
+   [cache] test: 20 docs tokenised (0s so far)
+   PASS 1_metrics (0.0s)
+   PASS 2_loader_leak_guard (0.1s)
+   PASS 3_tokenisation (0.3s)
+   PASS 4_model (0.2s)
+   PASS 5_peft_device (2.1s)
+   PASS 6_overfit_32 (19.9s)
+{"ok": true, "failed": []}
+   [selftest] exit 0
+   [queue] 5 jobs on 1 slot(s) (CPU); notebook budget ends at 07:38
+   [queue] SKIP smoke_full_ft_M4_bloom_alibi: only 6 min left
+   [queue] SKIP smoke_lorma_M4_bloom_alibi: only 7 min left
+   [queue] START smoke_adalora_M4_bloom_alibi (adalora, attempt 1) on slot 0, budget 9 min
+[smoke_adalora_M4_bloom_alibi] start P0/adalora/M4 on cpu, budget 9 min, attempt 1
+[smoke_adalora_M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[smoke_adalora_M4_bloom_alibi]    [adalora] 16 matrices, rank 16 -> target 8 (budget 256 -> 128 singular values)
+[smoke_adalora_M4_bloom_alibi]    [adalora] trainable 41,794 / 111,874 (37.358%)
+/kaggle/working/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+[smoke_adalora_M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[smoke_adalora_M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[smoke_adalora_M4_bloom_alibi]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[smoke_adalora_M4_bloom_alibi]    [check] merged_equals_unmerged       advisory  pass value=1.19e-07 thr=0.001
+[smoke_adalora_M4_bloom_alibi]    [preflight] train 10,318 tok/s, inference 29,210 tok/s, micro-batch 16 chunks, peak 0.00 GB
+   [queue] END smoke_adalora_M4_bloom_alibi: smoke_ok (smoke ok)
+   [queue] START smoke_adapters_M4_bloom_alibi (adapters, attempt 1) on slot 0, budget 14 min
+[smoke_adapters_M4_bloom_alibi] start P0/adapters/M4 on cpu, budget 14 min, attempt 1
+[smoke_adapters_M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[smoke_adapters_M4_bloom_alibi]    [adapters] trainable 42,882 / 112,386 (38.156%)
+/kaggle/working/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+[smoke_adapters_M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[smoke_adapters_M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[smoke_adapters_M4_bloom_alibi]    [check] zero_init_equals_base        advisory  pass value=0.000107 thr=0.05
+[smoke_adapters_M4_bloom_alibi]    [preflight] train 13,072 tok/s, inference 33,365 tok/s, micro-batch 16 chunks, peak 0.00 GB
+   [queue] END smoke_adapters_M4_bloom_alibi: smoke_ok (smoke ok)
+   [queue] START smoke_partial_ft_M4_bloom_alibi (partial_ft, attempt 1) on slot 0, budget 27 min
+[smoke_partial_ft_M4_bloom_alibi] start P0/partial_ft/M4 on cpu, budget 27 min, attempt 1
+[smoke_partial_ft_M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[smoke_partial_ft_M4_bloom_alibi]    [partial_ft] trainable 59,650 / 78,850 (75.650%)
+/kaggle/working/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+[smoke_partial_ft_M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[smoke_partial_ft_M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[smoke_partial_ft_M4_bloom_alibi]    [preflight] train 13,759 tok/s, inference 39,861 tok/s, micro-batch 16 chunks, peak 0.00 GB
+   [queue] END smoke_partial_ft_M4_bloom_alibi: smoke_ok (smoke ok)
+   [final] ALL_RESULTS.csv: 5 rows
+   [plan] upload order (Codabench, <= 10/day):
+   [plan] MISSING experiments (no valid submission yet): ['E1', 'E2', 'E3', 'E4', 'E5', 'E6']
+   [final] 0/5 jobs DONE; output 0.00 GB
+
+===== run_experiment.py exit code: 0 (0 ok, 1 nothing finished, 2 data / weights missing) =====
+job                               status         dev F1   tau  K  frac    min  check
+smoke_full_ft_M4_bloom_alibi      SKIPPED_TIME                                  only 6 min left in the notebook budget
+smoke_lorma_M4_bloom_alibi        SKIPPED_TIME                                  only 7 min left in the notebook budget
+smoke_adalora_M4_bloom_alibi      SMOKE_OK                                      
+smoke_adapters_M4_bloom_alibi     SMOKE_OK                                      
+smoke_partial_ft_M4_bloom_alibi   SMOKE_OK                                      
+
+----- INDEX.md -----
+# Phase 4 (CJPE) -- P0: Optional data audit, token cache, selftest and GPU smoke
+
+Updated 2026-10-21 07:03:49. Deadline 2026-10-21 23:59 IST.
+
+| job | model | technique | status | dev macro-F1 | tau | epochs | K | train frac | minutes | reason |
+|---|---|---|---|---|---|---|---|---|---|---|
+| smoke_full_ft_M4_bloom_alibi | M4 | full_ft | SKIPPED_TIME |  |  |  |  |  |  | only 6 min left in the notebook budget |
+| smoke_lorma_M4_bloom_alibi | M4 | lorma | SKIPPED_TIME |  |  |  |  |  |  | only 7 min left in the notebook budget |
+| smoke_adalora_M4_bloom_alibi | M4 | adalora | SMOKE_OK |  |  |  |  |  |  |  |
+| smoke_adapters_M4_bloom_alibi | M4 | adapters | SMOKE_OK |  |  |  |  |  |  |  |
+| smoke_partial_ft_M4_bloom_alibi | M4 | partial_ft | SMOKE_OK |  |  |  |  |  |  |  |
+
+## Next command for the unfinished models (here or on another account)
+
+```
+!cd /kaggle/working/phase4 && python run_experiment.py --exp P0 --models M4 --resume auto --time-budget-h 0.6
+```
+Attach this notebook's output as an input so finished models are skipped.
+
+
+----- UPLOAD_PLAN.csv -----
+order,experiment,technique,model_id,job,dev_macro_f1,role,path
+
+phase4_out/  (0.0 MB in files here)
+  P0_audit/  (0.0 MB in files here)
+    smoke_adalora_M4_bloom_alibi/  (0.0 MB in files here)
+    smoke_adapters_M4_bloom_alibi/  (0.0 MB in files here)
+    smoke_full_ft_M4_bloom_alibi/  (0.0 MB in files here)
+    smoke_lorma_M4_bloom_alibi/  (0.0 MB in files here)
+    smoke_partial_ft_M4_bloom_alibi/  (0.0 MB in files here)
+total output 0.00 GB
+
+REMINDER: Save Version -> Save & Run All (Commit) keeps /kaggle/working/phase4_out as this notebook's output. Download BEST/submission.zip and results_*.csv from the Output tab.

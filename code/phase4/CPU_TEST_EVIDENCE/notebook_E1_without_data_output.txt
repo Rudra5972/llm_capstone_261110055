@@ -1,0 +1,102 @@
+3.13.16 2026-10-21 07:00:27
+torch 2.14.1+cu130 | GPUs: 0 []
+inputs: ['01-train-gpt2style', '02-train-llamastyle', '03-train-mistral-sliding', '04-train-bloom-alibi']
+Writing /kaggle/working/phase4/bpe_tokenizer.py
+Writing /kaggle/working/phase4/phase1_models.py
+Writing /kaggle/working/phase4/ner_common.py
+Writing /kaggle/working/phase4/ner_models.py
+Writing /kaggle/working/phase4/ner_peft.py
+Writing /kaggle/working/phase4/cjpe_common.py
+Writing /kaggle/working/phase4/cjpe_data.py
+Writing /kaggle/working/phase4/cjpe_tok.py
+Writing /kaggle/working/phase4/cjpe_models.py
+Writing /kaggle/working/phase4/cjpe_peft.py
+Writing /kaggle/working/phase4/cjpe_eval.py
+Writing /kaggle/working/phase4/cjpe_kd.py
+Writing /kaggle/working/phase4/cjpe_train.py
+Writing /kaggle/working/phase4/cjpe_predict.py
+Writing /kaggle/working/phase4/validate_submission.py
+Writing /kaggle/working/phase4/select_best.py
+Writing /kaggle/working/phase4/aggregate.py
+Writing /kaggle/working/phase4/run_experiment.py
+Writing /kaggle/working/phase4/selftest.py
+all 19 modules verified
+Phase-1 weights: {
+ "M1": "/kaggle/input/01-train-gpt2style/p1_M1/final",
+ "M2": "/kaggle/input/02-train-llamastyle/p1_M2/final",
+ "M3": "/kaggle/input/03-train-mistral-sliding/p1_M3/final",
+ "M4": "/kaggle/input/04-train-bloom-alibi/p1_M4/final"
+}
+train.json -> []
+dev.json -> []
+test.json -> []
+HF secret found: no
+earlier phase4_out inputs: []
+=== Phase 4 E1: Full fine-tuning | 2026-10-21 07:00:29 | budget 3.5 h | 0 GPU(s) | free disk 23 GB ===
+   [phase1] M1 gpt2style        -> /kaggle/input/01-train-gpt2style/p1_M1/final
+   [phase1] M2 llamastyle       -> /kaggle/input/02-train-llamastyle/p1_M2/final
+   [phase1] M3 mistral-sliding  -> /kaggle/input/03-train-mistral-sliding/p1_M3/final
+   [phase1] M4 bloom-alibi      -> /kaggle/input/04-train-bloom-alibi/p1_M4/final
+   [attn] bidir (default; no PILOT.json attached)
+   [data] attached dataset incomplete (found []); trying the HF download
+   [data] HF token found: no
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   DATA STEP FAILED: FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_CJPE/Train/train.json, Train/dev.json, Test/test.json -- OR add the Kaggle secret `HF` (read-only Hugging Face token of an account that accepted the dataset terms) and turn Internet ON. Found so far: {}
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "/kaggle/working/phase4/run_experiment.py", line 556, in main
+    data = prepare_data(a, out_root, bpe_dir, nh, nt, sections)
+  File "/kaggle/working/phase4/run_experiment.py", line 191, in prepare_data
+    raise FileNotFoundError(
+    ...<3 lines>...
+        f"Internet ON. Found so far: {found['paths']}")
+FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_CJPE/Train/train.json, Train/dev.json, Test/test.json -- OR add the Kaggle secret `HF` (read-only Hugging Face token of an account that accepted the dataset terms) and turn Internet ON. Found so far: {}
+
+
+===== run_experiment.py exit code: 2 (0 ok, 1 nothing finished, 2 data / weights missing) =====
+job                               status         dev F1   tau  K  frac    min  check
+M4_bloom_alibi                    FAILED                                        FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_
+M2_llamastyle                     FAILED                                        FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_
+M3_mistral_sliding                FAILED                                        FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_
+M1_gpt2style                      FAILED                                        FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! NO MODEL FINISHED in this notebook. Read the fail_reason column above and
+!!! /kaggle/working/phase4_out/INDEX.md / BLOCKED.json; the logs are in /kaggle/working/phase4_out/E1_full_ft/<job>/logs/console.log
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+----- INDEX.md -----
+# Phase 4 (CJPE) -- E1: Full fine-tuning
+
+Updated 2026-10-21 07:00:30. Deadline 2026-10-21 23:59 IST.
+
+| job | model | technique | status | dev macro-F1 | tau | epochs | K | train frac | minutes | reason |
+|---|---|---|---|---|---|---|---|---|---|---|
+| M4_bloom_alibi | M4 | full_ft | FAILED |  |  |  |  |  |  | FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_CJPE/Train/train.json, Train/dev.json, T |
+| M2_llamastyle | M2 | full_ft | FAILED |  |  |  |  |  |  | FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_CJPE/Train/train.json, Train/dev.json, T |
+| M3_mistral_sliding | M3 | full_ft | FAILED |  |  |  |  |  |  | FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_CJPE/Train/train.json, Train/dev.json, T |
+| M1_gpt2style | M1 | full_ft | FAILED |  |  |  |  |  |  | FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_CJPE/Train/train.json, Train/dev.json, T |
+
+## Next command for the unfinished models (here or on another account)
+
+```
+!cd /kaggle/working/phase4 && python run_experiment.py --exp E1 --models M1,M2,M3,M4 --resume auto --time-budget-h 3.5
+```
+Attach this notebook's output as an input so finished models are skipped.
+
+**BLOCKED (data):** FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_CJPE/Train/train.json, Train/dev.json, Test/test.json -- OR add the Kaggle secret `HF` (read-only Hugging Face token of an account that accepted the dataset terms) and turn Internet ON. Found so far: {}
+
+
+----- BLOCKED.json -----
+{
+  "reason": "FileNotFoundError: Phase-4 data not found. Attach a Kaggle dataset with Phase_4_CJPE/Train/train.json, Train/dev.json, Test/test.json -- OR add the Kaggle secret `HF` (read-only Hugging Face token of an account that accepted the dataset terms) and turn Internet ON. Found so far: {}",
+  "time": "2026-10-21 07:00:30"
+}
+phase4_out/  (0.0 MB in files here)
+  E1_full_ft/  (0.0 MB in files here)
+    M1_gpt2style/  (0.0 MB in files here)
+    M2_llamastyle/  (0.0 MB in files here)
+    M3_mistral_sliding/  (0.0 MB in files here)
+    M4_bloom_alibi/  (0.0 MB in files here)
+total output 0.00 GB
+
+REMINDER: Save Version -> Save & Run All (Commit) keeps /kaggle/working/phase4_out as this notebook's output. Download BEST/submission.zip and results_*.csv from the Output tab.

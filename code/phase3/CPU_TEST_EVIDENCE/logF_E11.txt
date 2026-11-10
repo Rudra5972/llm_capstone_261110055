@@ -1,0 +1,9 @@
+== E11_ensemble: Ensemble of BEST models + final report | budget 2.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   ensemble candidates: ['E5', 'E6', 'E8', 'E9']
+   uniform_all      members ['E5', 'E6', 'E8', 'E9'] -> dev pooled Macro-F1 0.0704
+   f1_weighted_all  members ['E5', 'E6', 'E8', 'E9'] -> dev pooled Macro-F1 0.0710
+   uniform_top3     members ['E6', 'E9', 'E5'] -> dev pooled Macro-F1 0.0751
+   dev Macro-F1 pooled 0.0751 | CL 0.1285 | IT 0.0698 | bias not applied (held-out gain -0.0034)
+   submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/E11_ensemble/ensemble/submission/submission.zip (6 docs, 213 labels)
+   BEST of 1 -> ensemble (ensemble), dev Macro-F1 0.0751
+   report written: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/REPORT_TABLES.md and README_PHASE3.md (13 finished jobs)

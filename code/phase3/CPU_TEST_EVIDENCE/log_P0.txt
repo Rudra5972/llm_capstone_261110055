@@ -1,0 +1,47 @@
+== P0_pilot: attention-mode pilot | budget 2.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   Phase-1 weights found for: ['M1', 'M2', 'M3', 'M4']
+   !!! no PILOT.json attached: using attention mode 'bidir' (Phase-2 default). Run the 00 notebook (or --exp P0) and attach its output to use the pilot's winner.
+   attention mode: bidir (default (no pilot))
+   environment: {'python': '3.13.16', 'torch': '2.14.1+cu130', 'cuda': '13.0', 'gpus': []}
+   2 jobs on 2 worker(s) ['cpu0', 'cpu1']: ['lora_causal_M2', 'lora_bidir_M2']
+
+[lora_causal_M2@cpu0] -- P0_pilot / lora_causal_M2 (lora, llamastyle) --
+[lora_causal_M2@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lora_causal_M2@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lora_causal_M2@cpu0]    [lora] trainable 66,509 / 291,341 params (22.829%) in 60 tensors
+[lora_causal_M2@cpu0]    smoke ok: 7,580 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.1 min
+[lora_causal_M2@cpu0] projected 0.1 min train + 0.0 min probe | 120 min left in the notebook budget
+[lora_causal_M2@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lora_causal_M2@cpu0]    [lora] trainable 66,509 / 291,341 params (22.829%) in 60 tensors
+[lora_causal_M2@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.0371 (best) | train loss 2.1470
+[lora_causal_M2@cpu0]    training done: best dev Macro-F1 0.0371 at epoch 1 (0.0 min)
+[lora_causal_M2@cpu0]    dev Macro-F1 pooled 0.0371 | CL 0.0606 | IT 0.0342 | bias APPLIED (held-out gain +0.0339)
+[lora_causal_M2@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/P0_pilot/lora_causal_M2/submission/submission.zip (6 docs, 213 labels)
+[lora_causal_M2@cpu0] DONE P0 lora_causal_M2: dev Macro-F1 0.0371
+[lora_causal_M2@cpu0] finished in 0.3 min | dev pooled Macro-F1 0.0371 | output so far 0.00 GB
+   BEST of 1 -> lora_causal_M2 (lora), dev Macro-F1 0.0371
+
+[lora_bidir_M2@cpu0] -- P0_pilot / lora_bidir_M2 (lora, llamastyle) --
+[lora_bidir_M2@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lora_bidir_M2@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lora_bidir_M2@cpu0]    [lora] trainable 66,509 / 291,341 params (22.829%) in 60 tensors
+[lora_bidir_M2@cpu0]    smoke ok: 7,657 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.1 min
+[lora_bidir_M2@cpu0] projected 0.1 min train + 0.0 min probe | 120 min left in the notebook budget
+[lora_bidir_M2@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lora_bidir_M2@cpu0]    [lora] trainable 66,509 / 291,341 params (22.829%) in 60 tensors
+[lora_bidir_M2@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.0306 (best) | train loss 2.1433
+[lora_bidir_M2@cpu0]    training done: best dev Macro-F1 0.0306 at epoch 1 (0.0 min)
+[lora_bidir_M2@cpu0]    dev Macro-F1 pooled 0.0306 | CL 0.0394 | IT 0.0387 | bias APPLIED (held-out gain +0.0067)
+[lora_bidir_M2@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/P0_pilot/lora_bidir_M2/submission/submission.zip (6 docs, 213 labels)
+[lora_bidir_M2@cpu0] DONE P0 lora_bidir_M2: dev Macro-F1 0.0306
+[lora_bidir_M2@cpu0] finished in 0.3 min | dev pooled Macro-F1 0.0306 | output so far 0.00 GB
+   BEST of 2 -> lora_causal_M2 (lora), dev Macro-F1 0.0371
+   BEST of 2 -> lora_causal_M2 (lora), dev Macro-F1 0.0371
+   PILOT: causal 0.0371 vs bidir 0.0306 -> attention mode 'causal' (PILOT.json)
+
+   UPLOAD: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/P0_pilot/BEST/submission.zip (winner lora_causal_M2, dev pooled Macro-F1 0.0371) -- validated
+
+== P0_pilot finished this session in 0.6 min (exit 0)
+   lora_causal_M2                   done                         0.0371  
+   lora_bidir_M2                    done                         0.0306  
+   Save this session's output (Save Version) -- it is the input of later sessions.

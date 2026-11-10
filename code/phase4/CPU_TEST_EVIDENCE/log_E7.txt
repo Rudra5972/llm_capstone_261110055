@@ -1,0 +1,208 @@
+=== Phase 4 E7: Extras: BitFit, LoRA, document-representation and class-weight ablations | 2026-10-21 07:18:48 | budget 1.5 h | 0 GPU(s) | free disk 21 GB ===
+   [phase1] M1 gpt2style        -> /tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e2/input/01-train-gpt2style/p1_M1/final
+   [phase1] M2 llamastyle       -> /tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e2/input/02-train-llamastyle/p1_M2/final
+   [phase1] M3 mistral-sliding  -> /tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e2/input/03-train-mistral-sliding/p1_M3/final
+   [phase1] M4 bloom-alibi      -> /tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e2/input/04-train-bloom-alibi/p1_M4/final
+   [attn] bidir (default; no PILOT.json attached)
+   [data] source: kaggle_dataset: {'train': '/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e2/input/phase4-cjpe-data/Phase_4_CJPE/Train/train.json', 'dev': '/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e2/input/phase4-cjpe-data/Phase_4_CJPE/Train/dev.json', 'test': '/tmp/claude-0/-home-claude/4f3168db-014f-5ebe-8de0-50f107c52328/scratchpad/e2e2/input/phase4-cjpe-data/Phase_4_CJPE/Test/test.json'}
+   [data] train: 61 records, list of objects, keys id='id' text='text' label='label'
+   [data] dev: 20 records, list of objects, keys id='id' text='text' label='label'
+   [data] test: 20 records, list of objects, keys id='id' text='text' label=None
+   [example] train: id='train_0000' label=0 text='reasons evidence facts facts appellant conviction appeal counsel issue . therefore (1) dismissed evidence the order accordingly dismissed THE appeal held the court appeal section held (1) bail conviction    supreme high bail that the facts the reasons court ORDER issue , section counsel appellant le'
+   [example] dev: id='dev_0000' label=0 text='respondent court facts the evidence that witness judgment respondent counsel counsel court evidence (1) supreme section dismissed held bail reasons act respondent therefore allowed supreme high conviction state evidence reasons petition\n\nORDER\n the appeal is dismissed and the conviction stands . the'
+   [example] test: id='test_0000' label=None text='judgment the accused appeal bail SENTENCE that judgment that the ACCORDINGLY evidence facts BAIL the supreme reasons the witness SECTION order appellant ORDER accused court that ISSUE that 12/2003 accused sentence high (1) supreme that accused allowed \n bail accordingly DISMISSED section bail . dism'
+   !!! [leak-guard] 1 train case(s) also occur in test -> DROPPED from train (ids ['train_leak_0']...)
+   [audit] token statistics in 0s
+   [audit] split   n      empty dup_id dup_text  pos_rate  chars(median)
+   [audit] train      61      0      0        0     0.508  3,352
+   [audit] dev        20      0      0        0     0.500  3,365
+   [audit] test       20      0      0        0            7,288
+   [audit] chars/token 6.82 (sample of 60)
+   [audit] train tokens: median 483, p90 2,929, max 2,971; >512 40%  >1024 40%  >2048 20%  >4096 0%
+   [audit] dev tokens: median 518, p90 2,874, max 2,898; >512 50%  >1024 45%  >2048 15%  >4096 0%
+   [audit] test tokens: median 1,086, p90 2,929, max 2,954; >512 65%  >1024 65%  >2048 35%  >4096 0%
+   [leak-guard] train x test {'id': 0, 'sha1': 1, 'norm': 1}, dev x test {'id': 0, 'sha1': 0, 'norm': 0}, train x dev {'id': 0, 'sha1': 0, 'norm': 0}; dropped train 1, dev 0
+   [cache] building (key 9ee98854dac9f5071x0, head 2044 / tail 2044 tokens per document, 2 processes) ...
+   [cache] train: 60 docs tokenised (0s so far)
+   [cache] dev: 20 docs tokenised (0s so far)
+   [cache] test: 20 docs tokenised (0s so far)
+   [queue] 7 jobs on 1 slot(s) (CPU); notebook budget ends at 08:48
+   [queue] START bitfit_M4_bloom_alibi (bitfit, attempt 1) on slot 0, budget 12 min
+[bitfit_M4_bloom_alibi] start E7/bitfit/M4 on cpu, budget 12 min, attempt 1
+[bitfit_M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[bitfit_M4_bloom_alibi]    [bitfit] trainable 10,210 / 78,850 (12.949%)
+[bitfit_M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[bitfit_M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[bitfit_M4_bloom_alibi]    [preflight] train 13,627 tok/s, inference 35,230 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[bitfit_M4_bloom_alibi]    [plan] budget 12 min, available 9 min, train 13,627 tok/s, infer 35,230 tok/s
+[bitfit_M4_bloom_alibi]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[bitfit_M4_bloom_alibi]    [plan]   4         0.1             0.0              114
+[bitfit_M4_bloom_alibi]    [plan]   2         0.1             0.0              168
+[bitfit_M4_bloom_alibi]    [plan]   1         0.0             0.0              277
+[bitfit_M4_bloom_alibi]    [plan] CHOSEN: K=4 epochs=2 train_fraction=1.0 (60/60 docs), projected 0 min
+[bitfit_M4_bloom_alibi]    [train] 60 docs/epoch, 8 steps/epoch x 2 epochs = 16 steps; eval at steps [4, 8] of each epoch; training deadline in 10 min
+[bitfit_M4_bloom_alibi]    [eval] epoch 0.50: dev macro-F1 0.4133 (tau 0.48; @0.5 0.3333) loss 0.6949
+[bitfit_M4_bloom_alibi]    [eval] epoch 1.00: dev macro-F1 0.4048 (tau 0.53; @0.5 0.3333) loss 0.6958
+[bitfit_M4_bloom_alibi]    [eval] epoch 1.50: dev macro-F1 0.3333 (tau 0.50; @0.5 0.3333) loss 0.6959
+[bitfit_M4_bloom_alibi]    [eval] epoch 2.00: dev macro-F1 0.3333 (tau 0.50; @0.5 0.3333) loss 0.6958
+[bitfit_M4_bloom_alibi]    [train] stopped: completed at step 16/16
+[bitfit_M4_bloom_alibi]    DONE dev macro-F1 0.4133 (P 0.4333 R 0.4500, tau 0.48); test positive rate 0.850; submission validated
+   [queue] END bitfit_M4_bloom_alibi: done (dev macro-F1 0.4133)
+   [queue] START bitfit_M1_gpt2style (bitfit, attempt 1) on slot 0, budget 14 min
+[bitfit_M1_gpt2style] start E7/bitfit/M1 on cpu, budget 14 min, attempt 1
+[bitfit_M1_gpt2style]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[bitfit_M1_gpt2style]    [bitfit] trainable 10,210 / 111,618 (9.147%)
+[bitfit_M1_gpt2style]    [check] all_tensors_on_one_device    critical  pass
+[bitfit_M1_gpt2style]    [check] forward_backward_finite      critical  pass
+[bitfit_M1_gpt2style]    [preflight] train 27,024 tok/s, inference 52,523 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[bitfit_M1_gpt2style]    [plan] budget 14 min, available 11 min, train 27,024 tok/s, infer 52,523 tok/s
+[bitfit_M1_gpt2style]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[bitfit_M1_gpt2style]    [plan]   4         0.0             0.0              260
+[bitfit_M1_gpt2style]    [plan]   2         0.0             0.0              378
+[bitfit_M1_gpt2style]    [plan]   1         0.0             0.0              624
+[bitfit_M1_gpt2style]    [plan] CHOSEN: K=4 epochs=2 train_fraction=1.0 (60/60 docs), projected 0 min
+[bitfit_M1_gpt2style]    [train] 60 docs/epoch, 8 steps/epoch x 2 epochs = 16 steps; eval at steps [4, 8] of each epoch; training deadline in 12 min
+[bitfit_M1_gpt2style]    [eval] epoch 0.50: dev macro-F1 0.6011 (tau 0.46; @0.5 0.3333) loss 0.6913
+[bitfit_M1_gpt2style]    [eval] epoch 1.00: dev macro-F1 0.7333 (tau 0.51; @0.5 0.3333) loss 0.6895
+[bitfit_M1_gpt2style]    [eval] epoch 1.50: dev macro-F1 0.4357 (tau 0.52; @0.5 0.3333) loss 0.6902
+[bitfit_M1_gpt2style]    [eval] epoch 2.00: dev macro-F1 0.4357 (tau 0.52; @0.5 0.3333) loss 0.6902
+[bitfit_M1_gpt2style]    [train] stopped: completed at step 16/16
+[bitfit_M1_gpt2style]    DONE dev macro-F1 0.7333 (P 0.8333 R 0.7500, tau 0.51); test positive rate 0.850; submission validated
+   [queue] END bitfit_M1_gpt2style: done (dev macro-F1 0.7333)
+   [queue] START lora_M4_bloom_alibi (lora, attempt 1) on slot 0, budget 16 min
+[lora_M4_bloom_alibi] start E7/lora/M4 on cpu, budget 16 min, attempt 1
+[lora_M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[lora_M4_bloom_alibi]    [lora] trainable 41,538 / 111,618 (37.214%)
+[lora_M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[lora_M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[lora_M4_bloom_alibi]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[lora_M4_bloom_alibi]    [check] merged_equals_unmerged       advisory  pass value=1.79e-07 thr=0.00114
+[lora_M4_bloom_alibi]    [preflight] train 10,584 tok/s, inference 31,161 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[lora_M4_bloom_alibi]    [plan] budget 16 min, available 14 min, train 10,584 tok/s, infer 31,161 tok/s
+[lora_M4_bloom_alibi]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[lora_M4_bloom_alibi]    [plan]   4         0.1             0.0              136
+[lora_M4_bloom_alibi]    [plan]   2         0.1             0.0              201
+[lora_M4_bloom_alibi]    [plan]   1         0.0             0.0              332
+[lora_M4_bloom_alibi]    [plan] CHOSEN: K=4 epochs=2 train_fraction=1.0 (60/60 docs), projected 0 min
+[lora_M4_bloom_alibi]    [train] 60 docs/epoch, 8 steps/epoch x 2 epochs = 16 steps; eval at steps [4, 8] of each epoch; training deadline in 15 min
+[lora_M4_bloom_alibi]    [eval] epoch 0.50: dev macro-F1 0.6970 (tau 0.48; @0.5 0.5604) loss 0.6800
+[lora_M4_bloom_alibi]    [eval] epoch 1.00: dev macro-F1 0.5604 (tau 0.50; @0.5 0.5604) loss 0.6703
+[lora_M4_bloom_alibi]    [eval] epoch 1.50: dev macro-F1 0.6267 (tau 0.47; @0.5 0.5604) loss 0.6610
+[lora_M4_bloom_alibi]    [eval] epoch 2.00: dev macro-F1 0.6267 (tau 0.50; @0.5 0.6267) loss 0.6466
+[lora_M4_bloom_alibi]    [train] stopped: completed at step 16/16
+[lora_M4_bloom_alibi]    DONE dev macro-F1 0.6970 (P 0.7083 R 0.7000, tau 0.48); test positive rate 0.450; submission validated
+   [queue] END lora_M4_bloom_alibi: done (dev macro-F1 0.6970)
+   [queue] START repr_headtail_M4_bloom_alibi (lorma, attempt 1) on slot 0, budget 20 min
+[repr_headtail_M4_bloom_alibi] start E7/lorma/M4 on cpu, budget 20 min, attempt 1
+[repr_headtail_M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr headtail K=4; integrity ok
+[repr_headtail_M4_bloom_alibi]    [lorma] trainable 45,634 / 115,714 (39.437%)
+[repr_headtail_M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[repr_headtail_M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[repr_headtail_M4_bloom_alibi]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[repr_headtail_M4_bloom_alibi]    [check] merged_equals_unmerged       advisory  pass value=8.2e-08 thr=0.001
+[repr_headtail_M4_bloom_alibi]    [preflight] train 4,974 tok/s, inference 13,943 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[repr_headtail_M4_bloom_alibi]    [plan] budget 20 min, available 18 min, train 4,974 tok/s, infer 13,943 tok/s
+[repr_headtail_M4_bloom_alibi]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[repr_headtail_M4_bloom_alibi]    [plan]   4         0.1             0.0              120
+[repr_headtail_M4_bloom_alibi]    [plan] CHOSEN: K=4 epochs=2 train_fraction=0.5 (30/60 docs), projected 0 min   <<< FIXED PLAN
+[repr_headtail_M4_bloom_alibi]    [train] 30 docs/epoch, 4 steps/epoch x 2 epochs = 8 steps; eval at steps [2, 4] of each epoch; training deadline in 19 min
+[repr_headtail_M4_bloom_alibi]    [eval] epoch 0.50: dev macro-F1 0.3333 (tau 0.50; @0.5 0.3333) loss 0.6957
+[repr_headtail_M4_bloom_alibi]    [eval] epoch 1.00: dev macro-F1 0.4357 (tau 0.52; @0.5 0.3333) loss 0.6949
+[repr_headtail_M4_bloom_alibi]    [eval] epoch 1.50: dev macro-F1 0.4357 (tau 0.52; @0.5 0.3333) loss 0.6946
+[repr_headtail_M4_bloom_alibi]    [eval] epoch 2.00: dev macro-F1 0.4357 (tau 0.52; @0.5 0.3333) loss 0.6944
+[repr_headtail_M4_bloom_alibi]    [train] stopped: completed at step 8/8
+[repr_headtail_M4_bloom_alibi]    DONE dev macro-F1 0.4357 (P 0.7632 R 0.5500, tau 0.52); test positive rate 0.950; submission validated
+   [queue] END repr_headtail_M4_bloom_alibi: done (dev macro-F1 0.4357)
+   [queue] START repr_last_k_M4_bloom_alibi (lorma, attempt 1) on slot 0, budget 27 min
+[repr_last_k_M4_bloom_alibi] start E7/lorma/M4 on cpu, budget 27 min, attempt 1
+[repr_last_k_M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr last_k K=4; integrity ok
+[repr_last_k_M4_bloom_alibi]    [lorma] trainable 45,634 / 115,714 (39.437%)
+[repr_last_k_M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[repr_last_k_M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[repr_last_k_M4_bloom_alibi]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[repr_last_k_M4_bloom_alibi]    [check] merged_equals_unmerged       advisory  pass value=8.94e-08 thr=0.001
+[repr_last_k_M4_bloom_alibi]    [preflight] train 12,815 tok/s, inference 34,936 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[repr_last_k_M4_bloom_alibi]    [plan] budget 27 min, available 24 min, train 12,815 tok/s, infer 34,936 tok/s
+[repr_last_k_M4_bloom_alibi]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[repr_last_k_M4_bloom_alibi]    [plan]   4         0.1             0.0              290
+[repr_last_k_M4_bloom_alibi]    [plan]   2         0.1             0.0              426
+[repr_last_k_M4_bloom_alibi]    [plan]   1         0.0             0.0              703
+[repr_last_k_M4_bloom_alibi]    [plan] CHOSEN: K=4 epochs=2 train_fraction=0.5 (30/60 docs), projected 0 min   <<< FIXED PLAN
+[repr_last_k_M4_bloom_alibi]    [train] 30 docs/epoch, 4 steps/epoch x 2 epochs = 8 steps; eval at steps [2, 4] of each epoch; training deadline in 25 min
+[repr_last_k_M4_bloom_alibi]    [eval] epoch 0.50: dev macro-F1 0.3333 (tau 0.50; @0.5 0.3333) loss 0.6964
+[repr_last_k_M4_bloom_alibi]    [eval] epoch 1.00: dev macro-F1 0.4357 (tau 0.52; @0.5 0.3333) loss 0.6951
+[repr_last_k_M4_bloom_alibi]    [eval] epoch 1.50: dev macro-F1 0.4357 (tau 0.52; @0.5 0.3333) loss 0.6945
+[repr_last_k_M4_bloom_alibi]    [eval] epoch 2.00: dev macro-F1 0.4357 (tau 0.52; @0.5 0.3333) loss 0.6941
+[repr_last_k_M4_bloom_alibi]    [train] stopped: completed at step 8/8
+[repr_last_k_M4_bloom_alibi]    DONE dev macro-F1 0.4357 (P 0.7632 R 0.5500, tau 0.52); test positive rate 0.850; submission validated
+   [queue] END repr_last_k_M4_bloom_alibi: done (dev macro-F1 0.4357)
+   [queue] START repr_sections_M4_bloom_alibi (lorma, attempt 1) on slot 0, budget 40 min
+[repr_sections_M4_bloom_alibi] start E7/lorma/M4 on cpu, budget 40 min, attempt 1
+[repr_sections_M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr sections K=2; integrity ok
+[repr_sections_M4_bloom_alibi]    [lorma] trainable 45,634 / 115,714 (39.437%)
+[repr_sections_M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[repr_sections_M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[repr_sections_M4_bloom_alibi]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[repr_sections_M4_bloom_alibi]    [check] merged_equals_unmerged       advisory  pass value=8.2e-08 thr=0.001
+[repr_sections_M4_bloom_alibi]    [preflight] train 7,305 tok/s, inference 17,228 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[repr_sections_M4_bloom_alibi]    [plan] budget 40 min, available 38 min, train 7,305 tok/s, infer 17,228 tok/s
+[repr_sections_M4_bloom_alibi]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[repr_sections_M4_bloom_alibi]    [plan]   2         0.1             0.0              547
+[repr_sections_M4_bloom_alibi]    [plan] CHOSEN: K=2 epochs=2 train_fraction=0.5 (30/60 docs), projected 0 min   <<< FIXED PLAN
+[repr_sections_M4_bloom_alibi]    [train] 30 docs/epoch, 4 steps/epoch x 2 epochs = 8 steps; eval at steps [2, 4] of each epoch; training deadline in 39 min
+[repr_sections_M4_bloom_alibi]    [eval] epoch 0.50: dev macro-F1 0.3333 (tau 0.50; @0.5 0.3333) loss 0.6944
+[repr_sections_M4_bloom_alibi]    [eval] epoch 1.00: dev macro-F1 0.8990 (tau 0.52; @0.5 0.3333) loss 0.6897
+[repr_sections_M4_bloom_alibi]    [eval] epoch 1.50: dev macro-F1 1.0000 (tau 0.52; @0.5 0.3333) loss 0.6869
+[repr_sections_M4_bloom_alibi]    [eval] epoch 2.00: dev macro-F1 0.9499 (tau 0.52; @0.5 0.3333) loss 0.6856
+[repr_sections_M4_bloom_alibi]    [train] stopped: completed at step 8/8
+[repr_sections_M4_bloom_alibi]    DONE dev macro-F1 1.0000 (P 1.0000 R 1.0000, tau 0.52); test positive rate 0.500; submission validated
+   [queue] END repr_sections_M4_bloom_alibi: done (dev macro-F1 1.0000)
+   [queue] START cw_none_M4_bloom_alibi (lorma, attempt 1) on slot 0, budget 80 min
+[cw_none_M4_bloom_alibi] start E7/lorma/M4 on cpu, budget 80 min, attempt 1
+[cw_none_M4_bloom_alibi]    data: train 60, dev 20, test 20 docs; repr hier K=4; integrity ok
+[cw_none_M4_bloom_alibi]    [lorma] trainable 45,634 / 115,714 (39.437%)
+[cw_none_M4_bloom_alibi]    [check] all_tensors_on_one_device    critical  pass
+[cw_none_M4_bloom_alibi]    [check] forward_backward_finite      critical  pass
+[cw_none_M4_bloom_alibi]    [check] zero_init_equals_base        advisory  pass value=0 thr=0.0001
+[cw_none_M4_bloom_alibi]    [check] merged_equals_unmerged       advisory  pass value=8.2e-08 thr=0.001
+[cw_none_M4_bloom_alibi]    [preflight] train 12,548 tok/s, inference 35,233 tok/s, micro-batch 16 chunks, peak 0.00 GB
+[cw_none_M4_bloom_alibi]    [plan] budget 80 min, available 76 min, train 12,548 tok/s, infer 35,233 tok/s
+[cw_none_M4_bloom_alibi]    [plan]   K  epoch(min)  inference(min)  epochs that fit
+[cw_none_M4_bloom_alibi]    [plan]   4         0.1             0.0              893
+[cw_none_M4_bloom_alibi]    [plan]   2         0.1             0.0             1313
+[cw_none_M4_bloom_alibi]    [plan]   1         0.0             0.0             2167
+[cw_none_M4_bloom_alibi]    [plan] CHOSEN: K=4 epochs=2 train_fraction=0.5 (30/60 docs), projected 0 min   <<< FIXED PLAN
+[cw_none_M4_bloom_alibi]    [train] 30 docs/epoch, 4 steps/epoch x 2 epochs = 8 steps; eval at steps [2, 4] of each epoch; training deadline in 78 min
+[cw_none_M4_bloom_alibi]    [eval] epoch 0.50: dev macro-F1 0.3333 (tau 0.50; @0.5 0.3333) loss 0.6966
+[cw_none_M4_bloom_alibi]    [eval] epoch 1.00: dev macro-F1 0.4048 (tau 0.52; @0.5 0.3333) loss 0.6953
+[cw_none_M4_bloom_alibi]    [eval] epoch 1.50: dev macro-F1 0.4357 (tau 0.52; @0.5 0.3333) loss 0.6947
+[cw_none_M4_bloom_alibi]    [eval] epoch 2.00: dev macro-F1 0.4048 (tau 0.52; @0.5 0.3333) loss 0.6943
+[cw_none_M4_bloom_alibi]    [train] stopped: completed at step 8/8
+[cw_none_M4_bloom_alibi]    DONE dev macro-F1 0.4357 (P 0.7632 R 0.5500, tau 0.52); test positive rate 0.750; submission validated
+   [queue] END cw_none_M4_bloom_alibi: done (dev macro-F1 0.4357)
+   [select] E7_extras: BEST = repr_sections_M4_bloom_alibi (dev macro-F1 1.0000)
+   [final] ALL_RESULTS.csv: 7 rows
+   [plan] upload order (Codabench, <= 10/day):
+   [plan] MISSING experiments (no valid submission yet): ['E1', 'E2', 'E3', 'E4', 'E5', 'E6']
+   [final] 7/7 jobs DONE; output 0.00 GB
+/home/claude/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+/home/claude/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+/home/claude/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+/home/claude/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+/home/claude/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+/home/claude/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}
+/home/claude/phase4/cjpe_train.py:229: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return {"loss": float(loss), "logits_shape": list(logits.shape)}

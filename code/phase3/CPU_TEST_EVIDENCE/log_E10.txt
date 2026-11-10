@@ -1,0 +1,168 @@
+== E10_ablations: Ablations: context, head, loss, domain handling | budget 2.0 h | deadline of the brief 2026-10-16 23:59 (strict)
+   Phase-1 weights found for: ['M1', 'M2', 'M3', 'M4']
+   attention mode: causal (pilot /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/PILOT.json)
+   environment: {'python': '3.13.16', 'torch': '2.14.1+cu130', 'cuda': '13.0', 'gpus': []}
+   10 jobs on 2 worker(s) ['cpu0', 'cpu1']: ['lorma_base_M4', 'lorma_sent_M4', 'lorma_ctx1_M4', 'lorma_seqctx_M4', 'lorma_ce_M4', 'lorma_focal_M4', 'lorma_logitadj_M4', 'lorma_onlyCL_M4', 'lorma_onlyIT_M4', 'lorma_perdomain_M4']
+
+[lorma_base_M4@cpu0] -- E10_ablations / lorma_base_M4 (lorma, bloom-alibi) --
+[lorma_base_M4@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_base_M4@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lorma_base_M4@cpu0]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_base_M4@cpu0]    smoke ok: 6,861 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.1 min
+[lorma_base_M4@cpu0] projected 0.1 min train + 0.0 min probe | 120 min left in the notebook budget
+[lorma_base_M4@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_base_M4@cpu0]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_base_M4@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.0646 (best) | train loss 2.0990
+[lorma_base_M4@cpu0]    training done: best dev Macro-F1 0.0646 at epoch 1 (0.1 min)
+[lorma_base_M4@cpu0]    dev Macro-F1 pooled 0.0646 | CL 0.1296 | IT 0.0540 | bias not applied (held-out gain -0.0171)
+[lorma_base_M4@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E10_ablations/lorma_base_M4/submission/submission.zip (6 docs, 213 labels)
+[lorma_base_M4@cpu0] DONE E10 lorma_base_M4: dev Macro-F1 0.0646
+[lorma_base_M4@cpu0] finished in 0.3 min | dev pooled Macro-F1 0.0646 | output so far 0.01 GB
+   BEST of 1 -> lorma_base_M4 (lorma), dev Macro-F1 0.0646
+
+[lorma_sent_M4@cpu0] -- E10_ablations / lorma_sent_M4 (lorma, bloom-alibi) --
+[lorma_sent_M4@cpu0]    train windows: 217 (sent) | labelled sentence slots 217 | max tokens 237
+[lorma_sent_M4@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lorma_sent_M4@cpu0]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+
+[lorma_ctx1_M4@cpu1] -- E10_ablations / lorma_ctx1_M4 (lorma, bloom-alibi) --
+[lorma_ctx1_M4@cpu1]    train windows: 217 (ctx_1) | labelled sentence slots 217 | max tokens 457
+[lorma_ctx1_M4@cpu1]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lorma_ctx1_M4@cpu1]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_sent_M4@cpu0]    smoke ok: 570 tok/s | mem 0.0 GB | micro-batch 32 x accum 2 x world 1 | projected 0.7 min
+[lorma_sent_M4@cpu0] projected 0.7 min train + 0.0 min probe | 119 min left in the notebook budget
+[lorma_sent_M4@cpu0]    train windows: 217 (sent) | labelled sentence slots 217 | max tokens 237
+[lorma_sent_M4@cpu0]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_sent_M4@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.0775 (best) | train loss 2.1931
+[lorma_sent_M4@cpu0]    training done: best dev Macro-F1 0.0775 at epoch 1 (0.3 min)
+[lorma_ctx1_M4@cpu1]    smoke ok: 981 tok/s | mem 0.0 GB | micro-batch 16 x accum 2 x world 1 | projected 0.8 min
+[lorma_ctx1_M4@cpu1] projected 0.8 min train + 0.0 min probe | 119 min left in the notebook budget
+[lorma_ctx1_M4@cpu1]    train windows: 217 (ctx_1) | labelled sentence slots 217 | max tokens 457
+[lorma_ctx1_M4@cpu1]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_sent_M4@cpu0]    dev Macro-F1 pooled 0.0775 | CL 0.1337 | IT 0.0702 | bias not applied (held-out gain -0.0174)
+[lorma_sent_M4@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E10_ablations/lorma_sent_M4/submission/submission.zip (6 docs, 213 labels)
+[lorma_sent_M4@cpu0] DONE E10 lorma_sent_M4: dev Macro-F1 0.0775
+[lorma_sent_M4@cpu0] finished in 1.0 min | dev pooled Macro-F1 0.0775 | output so far 0.02 GB
+   BEST of 2 -> lorma_sent_M4 (lorma), dev Macro-F1 0.0775
+
+[lorma_seqctx_M4@cpu0] -- E10_ablations / lorma_seqctx_M4 (lorma, bloom-alibi) --
+[lorma_seqctx_M4@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_seqctx_M4@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lorma_seqctx_M4@cpu0]    [lorma] trainable 93,645 / 370,509 params (25.275%) in 62 tensors
+[lorma_seqctx_M4@cpu0]    smoke ok: 734 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.5 min
+[lorma_seqctx_M4@cpu0] projected 0.5 min train + 0.0 min probe | 118 min left in the notebook budget
+[lorma_seqctx_M4@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_seqctx_M4@cpu0]    [lorma] trainable 93,645 / 370,509 params (25.275%) in 62 tensors
+[lorma_ctx1_M4@cpu1]    == epoch 1/1 | dev pooled Macro-F1 0.0570 (best) | train loss 2.4687
+[lorma_ctx1_M4@cpu1]    training done: best dev Macro-F1 0.0570 at epoch 1 (0.8 min)
+[lorma_seqctx_M4@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.0191 (best) | train loss 2.1629
+[lorma_seqctx_M4@cpu0]    training done: best dev Macro-F1 0.0191 at epoch 1 (0.2 min)
+[lorma_ctx1_M4@cpu1]    dev Macro-F1 pooled 0.0570 | CL 0.0816 | IT 0.0633 | bias not applied (held-out gain -0.0188)
+[lorma_ctx1_M4@cpu1]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E10_ablations/lorma_ctx1_M4/submission/submission.zip (6 docs, 213 labels)
+[lorma_ctx1_M4@cpu1] DONE E10 lorma_ctx1_M4: dev Macro-F1 0.0570
+[lorma_ctx1_M4@cpu1] finished in 2.0 min | dev pooled Macro-F1 0.0570 | output so far 0.02 GB
+   BEST of 3 -> lorma_sent_M4 (lorma), dev Macro-F1 0.0775
+
+[lorma_ce_M4@cpu1] -- E10_ablations / lorma_ce_M4 (lorma, bloom-alibi) --
+[lorma_seqctx_M4@cpu0]    dev Macro-F1 pooled 0.0191 | CL 0.0082 | IT 0.0326 | bias APPLIED (held-out gain +0.0582)
+[lorma_seqctx_M4@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E10_ablations/lorma_seqctx_M4/submission/submission.zip (6 docs, 213 labels)
+[lorma_seqctx_M4@cpu0] DONE E10 lorma_seqctx_M4: dev Macro-F1 0.0191
+[lorma_seqctx_M4@cpu0] finished in 1.0 min | dev pooled Macro-F1 0.0191 | output so far 0.02 GB
+   BEST of 4 -> lorma_sent_M4 (lorma), dev Macro-F1 0.0775
+
+[lorma_focal_M4@cpu0] -- E10_ablations / lorma_focal_M4 (lorma, bloom-alibi) --
+[lorma_ce_M4@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_focal_M4@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_ce_M4@cpu1]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lorma_ce_M4@cpu1]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_focal_M4@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lorma_focal_M4@cpu0]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_ce_M4@cpu1]    smoke ok: 802 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.5 min
+[lorma_focal_M4@cpu0]    smoke ok: 824 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.5 min
+[lorma_focal_M4@cpu0] projected 0.5 min train + 0.0 min probe | 117 min left in the notebook budget
+[lorma_ce_M4@cpu1] projected 0.5 min train + 0.0 min probe | 117 min left in the notebook budget
+[lorma_focal_M4@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_ce_M4@cpu1]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_focal_M4@cpu0]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_ce_M4@cpu1]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_focal_M4@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.1091 (best) | train loss 1.7529
+[lorma_focal_M4@cpu0]    training done: best dev Macro-F1 0.1091 at epoch 1 (0.4 min)
+[lorma_ce_M4@cpu1]    == epoch 1/1 | dev pooled Macro-F1 0.1101 (best) | train loss 2.0819
+[lorma_ce_M4@cpu1]    training done: best dev Macro-F1 0.1101 at epoch 1 (0.4 min)
+[lorma_focal_M4@cpu0]    dev Macro-F1 pooled 0.1091 | CL 0.1843 | IT 0.1053 | bias not applied (held-out gain -0.0451)
+[lorma_focal_M4@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E10_ablations/lorma_focal_M4/submission/submission.zip (6 docs, 213 labels)
+[lorma_focal_M4@cpu0] DONE E10 lorma_focal_M4: dev Macro-F1 0.1091
+[lorma_ce_M4@cpu1]    dev Macro-F1 pooled 0.1101 | CL 0.1871 | IT 0.1053 | bias not applied (held-out gain -0.0468)
+[lorma_ce_M4@cpu1]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E10_ablations/lorma_ce_M4/submission/submission.zip (6 docs, 213 labels)
+[lorma_ce_M4@cpu1] DONE E10 lorma_ce_M4: dev Macro-F1 0.1101
+[lorma_focal_M4@cpu0] finished in 1.1 min | dev pooled Macro-F1 0.1091 | output so far 0.02 GB
+   BEST of 6 -> lorma_ce_M4 (lorma), dev Macro-F1 0.1101
+
+[lorma_logitadj_M4@cpu0] -- E10_ablations / lorma_logitadj_M4 (lorma, bloom-alibi) --
+[lorma_ce_M4@cpu1] finished in 1.1 min | dev pooled Macro-F1 0.1101 | output so far 0.02 GB
+   BEST of 6 -> lorma_ce_M4 (lorma), dev Macro-F1 0.1101
+
+[lorma_onlyCL_M4@cpu1] -- E10_ablations / lorma_onlyCL_M4 (lorma, bloom-alibi) --
+[lorma_logitadj_M4@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_onlyCL_M4@cpu1]    train windows: 8 (doc) | labelled sentence slots 113 | max tokens 1021
+[lorma_logitadj_M4@cpu0]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lorma_logitadj_M4@cpu0]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_onlyCL_M4@cpu1]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lorma_onlyCL_M4@cpu1]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_onlyCL_M4@cpu1]    smoke ok: 2,537 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.1 min
+[lorma_onlyCL_M4@cpu1] projected 0.1 min train + 0.0 min probe | 116 min left in the notebook budget
+[lorma_onlyCL_M4@cpu1]    train windows: 8 (doc) | labelled sentence slots 113 | max tokens 1021
+[lorma_onlyCL_M4@cpu1]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_logitadj_M4@cpu0]    smoke ok: 1,289 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.3 min
+[lorma_logitadj_M4@cpu0] projected 0.3 min train + 0.0 min probe | 116 min left in the notebook budget
+[lorma_logitadj_M4@cpu0]    train windows: 17 (doc) | labelled sentence slots 252 | max tokens 1023
+[lorma_logitadj_M4@cpu0]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_onlyCL_M4@cpu1]    == epoch 1/1 | dev pooled Macro-F1 0.0534 (best) | train loss 2.5606
+[lorma_onlyCL_M4@cpu1]    training done: best dev Macro-F1 0.0534 at epoch 1 (0.2 min)
+[lorma_onlyCL_M4@cpu1]    dev Macro-F1 pooled 0.0534 | CL 0.0534 | IT nan | bias APPLIED (held-out gain +0.1066)
+[lorma_onlyCL_M4@cpu1]    partial-domain run: no submission written (combined later)
+[lorma_onlyCL_M4@cpu1] DONE E10 lorma_onlyCL_M4: dev Macro-F1 0.0534
+[lorma_onlyCL_M4@cpu1] finished in 0.6 min | dev pooled Macro-F1 0.0534 | output so far 0.02 GB
+   BEST of 6 -> lorma_ce_M4 (lorma), dev Macro-F1 0.1101
+
+[lorma_onlyIT_M4@cpu1] -- E10_ablations / lorma_onlyIT_M4 (lorma, bloom-alibi) --
+[lorma_onlyIT_M4@cpu1]    train windows: 9 (doc) | labelled sentence slots 139 | max tokens 1023
+[lorma_onlyIT_M4@cpu1]    job self-checks passed: ['output_lengths', 'peft_zero_merge_pct']
+[lorma_onlyIT_M4@cpu1]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_logitadj_M4@cpu0]    == epoch 1/1 | dev pooled Macro-F1 0.0394 (best) | train loss 1.4943
+[lorma_logitadj_M4@cpu0]    training done: best dev Macro-F1 0.0394 at epoch 1 (0.4 min)
+[lorma_onlyIT_M4@cpu1]    smoke ok: 765 tok/s | mem 0.0 GB | micro-batch 4 x accum 2 x world 1 | projected 0.3 min
+[lorma_onlyIT_M4@cpu1] projected 0.3 min train + 0.0 min probe | 116 min left in the notebook budget
+[lorma_onlyIT_M4@cpu1]    train windows: 9 (doc) | labelled sentence slots 139 | max tokens 1023
+[lorma_onlyIT_M4@cpu1]    [lorma] trainable 74,701 / 351,565 params (21.248%) in 52 tensors
+[lorma_logitadj_M4@cpu0]    dev Macro-F1 pooled 0.0394 | CL 0.0723 | IT 0.0342 | bias APPLIED (held-out gain +0.0407)
+[lorma_logitadj_M4@cpu0]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E10_ablations/lorma_logitadj_M4/submission/submission.zip (6 docs, 213 labels)
+[lorma_logitadj_M4@cpu0] DONE E10 lorma_logitadj_M4: dev Macro-F1 0.0394
+[lorma_logitadj_M4@cpu0] finished in 1.0 min | dev pooled Macro-F1 0.0394 | output so far 0.02 GB
+   BEST of 7 -> lorma_ce_M4 (lorma), dev Macro-F1 0.1101
+[lorma_onlyIT_M4@cpu1]    == epoch 1/1 | dev pooled Macro-F1 0.0342 (best) | train loss 1.9440
+[lorma_onlyIT_M4@cpu1]    training done: best dev Macro-F1 0.0342 at epoch 1 (0.0 min)
+[lorma_onlyIT_M4@cpu1]    dev Macro-F1 pooled 0.0342 | CL nan | IT 0.0342 | bias APPLIED (held-out gain +0.0076)
+[lorma_onlyIT_M4@cpu1]    partial-domain run: no submission written (combined later)
+[lorma_onlyIT_M4@cpu1] DONE E10 lorma_onlyIT_M4: dev Macro-F1 0.0342
+[lorma_onlyIT_M4@cpu1] finished in 0.5 min | dev pooled Macro-F1 0.0342 | output so far 0.02 GB
+   BEST of 7 -> lorma_ce_M4 (lorma), dev Macro-F1 0.1101
+[lorma_perdomain_M4@cpu1]    dev Macro-F1 pooled 0.0467 | CL 0.0534 | IT 0.0342 | bias APPLIED (held-out gain +0.0071)
+[lorma_perdomain_M4@cpu1]    submission written and validated: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E10_ablations/lorma_perdomain_M4/submission/submission.zip (6 docs, 213 labels)
+   BEST of 8 -> lorma_ce_M4 (lorma), dev Macro-F1 0.1101
+   BEST of 8 -> lorma_ce_M4 (lorma), dev Macro-F1 0.1101
+
+   UPLOAD: /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/out/E10_ablations/BEST/submission.zip (winner lorma_ce_M4, dev pooled Macro-F1 0.1101) -- validated
+
+== E10_ablations finished this session in 4.6 min (exit 0)
+   lorma_base_M4                    done                         0.0646  
+   lorma_sent_M4                    done                         0.0775  
+   lorma_ctx1_M4                    done                         0.0570  
+   lorma_seqctx_M4                  done                         0.0191  
+   lorma_ce_M4                      done                         0.1101  
+   lorma_focal_M4                   done                         0.1091  
+   lorma_logitadj_M4                done                         0.0394  
+   lorma_onlyCL_M4                  done                         0.0534  
+   lorma_onlyIT_M4                  done                         0.0342  
+   lorma_perdomain_M4               done                         0.0467  
+   Save this session's output (Save Version) -- it is the input of later sessions.

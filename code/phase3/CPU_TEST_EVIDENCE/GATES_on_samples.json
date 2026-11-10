@@ -1,0 +1,200 @@
+{
+  "started": "2026-10-14 23:07:16",
+  "raw_files": {
+    "CL_train": "/tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/kin/cs781-phase3/Phase_3_RR/Train/CL_train.json",
+    "CL_dev": "/tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/kin/cs781-phase3/Phase_3_RR/Train/CL_dev.json",
+    "IT_train": "/tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/kin/cs781-phase3/Phase_3_RR/Train/IT_train.json",
+    "IT_dev": "/tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/kin/cs781-phase3/Phase_3_RR/Train/IT_dev.json",
+    "label_vocab": "/tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/kin/cs781-phase3/Phase_3_RR/Train/label_vocab.json",
+    "CL_test": "/tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/kin/cs781-phase3/Phase_3_RR/Test/CL_test.json",
+    "IT_test": "/tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/kin/cs781-phase3/Phase_3_RR/Test/IT_test.json"
+  },
+  "raw_md5": {
+    "CL_train": "581febe7ab96d3ef18ad0bd68540912a",
+    "CL_dev": "9080247eef828107c42d72e0aa238064",
+    "IT_train": "50edcbae9b9ae76061c9bcdd78182545",
+    "IT_dev": "1c48942cf412b84d3d4fb6935bdb7d6e",
+    "label_vocab": "cc27970ba33ba961f7d86d09d05d82b0",
+    "CL_test": "2dcfea5eaa627592e2f4935ba0783890",
+    "IT_test": "2dcf2acaeefac9449f8801e5832daede"
+  },
+  "tokenizer": {
+    "path": "/tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/kin/datasets/rudra1610/01-train-gpt2style/final/bpe_model.json",
+    "md5": "bcc6cccfed05c742f821015312f9881f",
+    "vocab": 1200
+  },
+  "G0": {
+    "docs": {
+      "CL_train": 3,
+      "CL_dev": 3,
+      "CL_test": 3,
+      "IT_train": 3,
+      "IT_dev": 3,
+      "IT_test": 3
+    },
+    "sentences": {
+      "CL_train": 97,
+      "CL_dev": 112,
+      "CL_test": 93,
+      "IT_train": 120,
+      "IT_dev": 120,
+      "IT_test": 120
+    },
+    "class_hist": {
+      "CL_train": {
+        "Fact": 42,
+        "Issue": 0,
+        "ArgumentPetitioner": 20,
+        "ArgumentRespondent": 8,
+        "Statute": 0,
+        "Dissent": 0,
+        "PrecedentReliedUpon": 0,
+        "PrecedentNotReliedUpon": 0,
+        "PrecedentOverruled": 0,
+        "RulingByLowerCourt": 0,
+        "RatioOfTheDecision": 23,
+        "RulingByPresentCourt": 4,
+        "None": 0
+      },
+      "CL_dev": {
+        "Fact": 63,
+        "Issue": 0,
+        "ArgumentPetitioner": 15,
+        "ArgumentRespondent": 0,
+        "Statute": 0,
+        "Dissent": 0,
+        "PrecedentReliedUpon": 0,
+        "PrecedentNotReliedUpon": 0,
+        "PrecedentOverruled": 0,
+        "RulingByLowerCourt": 31,
+        "RatioOfTheDecision": 1,
+        "RulingByPresentCourt": 1,
+        "None": 1
+      },
+      "IT_train": {
+        "Fact": 40,
+        "Issue": 6,
+        "ArgumentPetitioner": 11,
+        "ArgumentRespondent": 6,
+        "Statute": 36,
+        "Dissent": 0,
+        "PrecedentReliedUpon": 3,
+        "PrecedentNotReliedUpon": 0,
+        "PrecedentOverruled": 0,
+        "RulingByLowerCourt": 13,
+        "RatioOfTheDecision": 0,
+        "RulingByPresentCourt": 0,
+        "None": 5
+      },
+      "IT_dev": {
+        "Fact": 37,
+        "Issue": 6,
+        "ArgumentPetitioner": 22,
+        "ArgumentRespondent": 0,
+        "Statute": 1,
+        "Dissent": 0,
+        "PrecedentReliedUpon": 0,
+        "PrecedentNotReliedUpon": 14,
+        "PrecedentOverruled": 0,
+        "RulingByLowerCourt": 19,
+        "RatioOfTheDecision": 18,
+        "RulingByPresentCourt": 0,
+        "None": 3
+      }
+    },
+    "warnings": [],
+    "id_overlap": {}
+  },
+  "G1": {
+    "tokens_per_sentence": {
+      "mean": 61.670694864048336,
+      "p50": 49.0,
+      "p95": 150.89999999999986,
+      "p99": 228.94999999999993,
+      "max": 454.0
+    },
+    "tokens_per_doc": {
+      "mean": 2304.8888888888887,
+      "p50": 2157.5,
+      "p95": 3356.95,
+      "p99": 3379.39,
+      "max": 3385.0
+    },
+    "empty_sentences_unk_fallback": 0,
+    "max_sent_tokens": 256,
+    "sentences_truncated": 5,
+    "total_tokens": 40826,
+    "domain_prefix_ids": {
+      "CL": [
+        94,
+        70,
+        79,
+        96
+      ],
+      "IT": [
+        94,
+        902,
+        96
+      ]
+    }
+  },
+  "G2": {
+    "packing": {
+      "doc/bidir": {
+        "windows_train": 55,
+        "max_window_tokens": 1004,
+        "windows_infer": 67
+      },
+      "doc/causal": {
+        "windows_train": 55,
+        "max_window_tokens": 1004,
+        "windows_infer": 67
+      },
+      "sent/bidir": {
+        "windows_train": 662,
+        "max_window_tokens": 261,
+        "windows_infer": 662
+      },
+      "sent/causal": {
+        "windows_train": 662,
+        "max_window_tokens": 261,
+        "windows_infer": 662
+      },
+      "ctx_1/bidir": {
+        "windows_train": 662,
+        "max_window_tokens": 565,
+        "windows_infer": 662
+      },
+      "ctx_1/causal": {
+        "windows_train": 662,
+        "max_window_tokens": 565,
+        "windows_infer": 662
+      }
+    },
+    "validator": {
+      "accepted_dummy": true,
+      "rejected": {
+        "missing_id": [
+          "1 test ids missing, e.g. ['BHC_BomHC_2014_498']"
+        ],
+        "extra_id": [
+          "1 unknown ids, e.g. ['__not_a_test_id__']"
+        ],
+        "short_list": [
+          "BHC_BomHC_2014_498: 39 labels for 40 sentences"
+        ],
+        "long_list": [
+          "BHC_BomHC_2014_498: 41 labels for 40 sentences"
+        ],
+        "bad_label": [
+          "BHC_BomHC_2014_498: labels outside the vocabulary: ['NotALabel']"
+        ],
+        "folder_layer": [
+          "rejected"
+        ]
+      }
+    }
+  },
+  "status": "PASSED",
+  "seconds": 0.3
+}

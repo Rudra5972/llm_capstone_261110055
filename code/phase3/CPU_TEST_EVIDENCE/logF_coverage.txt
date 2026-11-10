@@ -1,0 +1,20 @@
+Winners (one upload per notebook):
+     E0 Full fine-tuning (reference baseline, no -
+     E1 LoRMA+ (compulsory)                      -
+     E2 LoRA                                     -
+     E3 rsLoRA                                   -
+     E4 IA3                                      -
+     E5 AdaLoRA                                  M2 dev F1 0.0671 -> /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/E5_adalora/M2_llamastyle/submission/submission.zip
+     E6 Knowledge distillation (self-contained f M4 dev F1 0.0972 -> /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/E6_kd/M4_bloom_alibi/submission/submission.zip
+     E7 QLoRA (simulated NF4)                    -
+     E8 Prefix Tuning                            M2 dev F1 0.0669 -> /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/E8_prefix/M2_llamastyle/submission/submission.zip
+     E9 Prompt Tuning                            M4 dev F1 0.0843 -> /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/E9_prompt/M4_bloom_alibi/submission/submission.zip
+    E10 Ablations: context, head, loss, domain h -
+    E11 Ensemble of BEST models + final report   M4+M4+M2 dev F1 0.0751 -> /tmp/claude-0/-home-claude/c08a8ae9-8be6-56ab-8566-928174f5f91f/scratchpad/work/outF/E11_ensemble/ensemble/submission/submission.zip
+
+Rule check: {'experiments_counted': 4, 'min_experiments': 6, 'peft_techniques': ['adalora', 'prefix', 'prompt'], 'min_peft_techniques': 5, 'lorma_done': False, 'kd_done': True, 'ok': False}
+Models not represented among the winners: ['M1', 'M3']. Also upload:
+   M1: no finished run anywhere yet
+   M3: no finished run anywhere yet
+
+Planned uploads: 5 (max 10 per day, 40 per phase; scoring takes 15-30 min each)

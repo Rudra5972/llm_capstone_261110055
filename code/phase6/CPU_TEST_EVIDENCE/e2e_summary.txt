@@ -1,0 +1,9 @@
+E1 0 {'M4_bloom_alibi': 'DONE', 'M2_llamastyle': 'DONE', 'M3_mistral_sliding': 'DONE', 'M1_gpt2style': 'DONE'}
+E6 0 {'teacher_M4_bloom_alibi': 'DONE', 'student_M4_bloom_alibi': 'DONE', 'student_M2_llamastyle': 'DONE', 'student_M3_mistral_sliding': 'DONE', 'student_M1_gpt2style': 'DONE'}
+E2 0 {'M4_bloom_alibi': 'DONE', 'M2_llamastyle': 'DONE', 'M3_mistral_sliding': 'DONE', 'M1_gpt2style': 'DONE'}
+E3 0 {'M4_bloom_alibi': 'DONE', 'M2_llamastyle': 'DONE', 'M3_mistral_sliding': 'DONE', 'M1_gpt2style': 'DONE'}
+E4 0 {'M4_bloom_alibi': 'DONE', 'M2_llamastyle': 'DONE', 'M3_mistral_sliding': 'DONE', 'M1_gpt2style': 'DONE'}
+E5 0 {'M4_bloom_alibi': 'DONE', 'M2_llamastyle': 'DONE', 'M3_mistral_sliding': 'DONE', 'M1_gpt2style': 'DONE'}
+E7 0 {'qlora_M4_bloom_alibi': 'DONE', 'prefix_M4_bloom_alibi': 'DONE', 'prompt_M4_bloom_alibi': 'DONE', 'repr_headtail_M4_bloom_alibi': 'DONE', 'repr_dancer_M4_bloom_alibi': 'DONE', 'beam3_M4_bloom_alibi': 'DONE'}
+E8 0 {}
+UPLOAD_PLAN [('E1', 'M2', '0.0230769'), ('E2', 'M1', '0.0957658'), ('E3', 'M2', '0.0230769'), ('E4', 'M4', '0.116805'), ('E5', 'M3', '0.173679'), ('E6', 'M1', '0.170055')]

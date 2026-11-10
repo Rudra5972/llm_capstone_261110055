@@ -1,0 +1,97 @@
+{
+  "tests": {
+    "1_metrics": {
+      "result": {
+        "hand_cases": 3,
+        "tau": 0.52
+      },
+      "seconds": 0.0
+    },
+    "2_loader_leak_guard": {
+      "result": {
+        "list": {
+          "label_key": "label",
+          "dropped": 2
+        },
+        "dict": {
+          "label_key": "judgment",
+          "dropped": 2
+        },
+        "wrapped": {
+          "label_key": "outcome",
+          "dropped": 2
+        }
+      },
+      "seconds": 0.0
+    },
+    "3_tokenisation": {
+      "result": {
+        "representation_checks": 532
+      },
+      "seconds": 0.3
+    },
+    "4_model": {
+      "result": {
+        "M1": "ok",
+        "M2": "ok",
+        "M3": "ok",
+        "M4": "ok"
+      },
+      "seconds": 0.3
+    },
+    "5_peft_device": {
+      "result": {
+        "M1/full_ft": 100.0,
+        "M1/lorma": 30.734,
+        "M1/lora": 28.769,
+        "M1/adalora": 28.895,
+        "M1/adapters": 29.542,
+        "M1/partial_ft": 30.678,
+        "M1/bitfit": 9.147,
+        "M1/kd": 100.0,
+        "M2/full_ft": 100.0,
+        "M2/lorma": 42.433,
+        "M2/lora": 42.433,
+        "M2/adalora": 42.696,
+        "M2/adapters": 43.173,
+        "M2/partial_ft": 42.017,
+        "M2/kd": 100.0,
+        "M3/full_ft": 100.0,
+        "M3/lorma": 42.433,
+        "M3/lora": 42.433,
+        "M3/adalora": 42.696,
+        "M3/adapters": 43.173,
+        "M3/partial_ft": 42.017,
+        "M3/kd": 100.0,
+        "M4/full_ft": 100.0,
+        "M4/lorma": 39.437,
+        "M4/lora": 37.214,
+        "M4/adalora": 37.358,
+        "M4/adapters": 38.156,
+        "M4/partial_ft": 43.427,
+        "M4/bitfit": 12.949,
+        "M4/kd": 100.0
+      },
+      "seconds": 2.4
+    },
+    "6_overfit_32": {
+      "result": {
+        "passed": true,
+        "final_loss": 0.04648246895521879,
+        "epochs": 21,
+        "n_docs": 32
+      },
+      "seconds": 17.8
+    },
+    "7_kill_resume": {
+      "result": {
+        "resumed_at_step": 3,
+        "done": true
+      },
+      "seconds": 9.8
+    }
+  },
+  "failed": [],
+  "started": "2026-10-21 07:21:40",
+  "ok": true
+}
